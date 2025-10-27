@@ -16,5 +16,6 @@ namespace CodeYoDAL.Models
         public string BusinessPhoneNumber { get; set; }
         public string SubjectName { get; set; }
         public TeacherCardsAttachements TeacherCardsAttachement{ get; set; }
+        public ICollection<TeacherStudents> TeacherStudents { get; set; }
     }
 }

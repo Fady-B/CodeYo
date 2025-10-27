@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using CodeYoDAL.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace ShaghalnyDAL.Models
 {
@@ -6,7 +7,11 @@ namespace ShaghalnyDAL.Models
     {
         [Key]
         public Guid StudentId { get; set; }
+        public Students Student { get; set; }
         [Key]
         public Guid TeacherId { get; set; }
+        public Teachers Teacher { get; set; }
+
+
     }
 }
