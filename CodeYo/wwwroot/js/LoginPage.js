@@ -1,15 +1,7 @@
 ﻿var lat;
 var long;
 var LoginAction = function () {
-    //var Recaptcha = grecaptcha.getResponse();
 
-    //if (Recaptcha === '') {
-    //    toastr.error('ReCaptcha Virification Is Failed');
-    //    return;
-    //}
-    //else {
-
-    //}
     debugger
     if (!$("#frmLogin").valid()) {
         return;
@@ -17,12 +9,11 @@ var LoginAction = function () {
     $('#Latitude').val(lat);
     $('#Longitude').val(long);
 
+    $("#signin").LoadingOverlay("show", {
+        background: "transparent"
+    });
     var _frmLogin = $("#frmLogin").serialize();
 
-    _frmLogin.Email =
-        $("#signin").LoadingOverlay("show", {
-            background: "transparent"
-        });
     $("#signin").LoadingOverlay("show");
     debugger
     $.ajax({

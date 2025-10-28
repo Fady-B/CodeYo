@@ -604,6 +604,10 @@ label.valid {
     margin-left: 110px;
     margin-right: 20px;
     margin-top: 10px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
 }
 
 @media screen and (max-width: 1200px) {
