@@ -22,4 +22,8 @@
     <ProjectReference Include="..\CodeYoDAL\CodeYoDAL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\assets\vendor\" />
+  </ItemGroup>
+
 </Project>

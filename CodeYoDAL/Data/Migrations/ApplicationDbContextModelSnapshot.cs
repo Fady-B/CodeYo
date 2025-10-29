@@ -302,6 +302,13 @@ namespace CodeYoDAL.Data.Migrations
                             ConcurrencyStamp = "4427b4f1-cf74-470a-a013-49461a1bd4e4",
                             Name = "Design Card",
                             NormalizedName = "DESIGN CARD"
+                        },
+                        new
+                        {
+                            Id = "32dcc3d9-17cf-44a8-aad8-69af8cd29277",
+                            ConcurrencyStamp = "c05658e7-7e35-4f87-a132-327d0aac7a27",
+                            Name = "Teachers",
+                            NormalizedName = "TEACHERS"
                         });
                 });
 

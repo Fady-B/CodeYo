@@ -1,0 +1,150 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@using CodeYoDAL.DALHelpers;
+@inject SignInManager<ApplicationUser> SignInManager
+
+<!-- Hero Section -->
+<section class="hero section dark-background">
+    <img src="~/assets/img/hero-bg-2.jpg" alt="" class="hero-bg">
+
+    <div class="container">
+        <div class="row gy-4 justify-content-between">
+            <div class="col-lg-4 order-lg-last hero-img" data-aos="zoom-out" data-aos-delay="100">
+                <img src="~/assets/img/hero-img.png" class="img-fluid animated" alt="">
+            </div>
+
+            <div class="col-lg-6  d-flex flex-column justify-content-center" data-aos="fade-in">
+                <h1>Build Your Cards Design <span>Code-Yo</span></h1>
+                <p>Become a talented designer and make your cards with Code-Yo</p>
+                <div class="d-flex">
+                    <a href="#NavigationSection" class="btn-get-started">Get Started</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <svg class="hero-waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28 " preserveAspectRatio="none">
+        <defs>
+            <path id="wave-path" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"></path>
+        </defs>
+        <g class="wave1">
+            <use xlink:href="#wave-path" x="50" y="3"></use>
+        </g>
+        <g class="wave2">
+            <use xlink:href="#wave-path" x="50" y="0"></use>
+        </g>
+        <g class="wave3">
+            <use xlink:href="#wave-path" x="50" y="9"></use>
+        </g>
+    </svg>
+
+</section>
+<!-- /Hero Section -->
+<!-- Features Section -->
+<section class="features section" id="NavigationSection">
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <div class="container">
+
+            <div class="row gy-4">
+
+                @if (User.IsInRole(ApplicationRoles.Teachers) || User.IsInRole(ApplicationRoles.Admin))
+                {
+                    <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="100">
+                        <div class="features-item">
+                            <i class="bi bi-person-badge" style="color: #ffbb2c;"></i>
+                            <h3><a href="@MainMenu.Teachers.Path" class="stretched-link">@MainMenu.Teachers.PageName</a></h3>
+                        </div>
+                    </div>
+                }
+
+                <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="features-item">
+                        <i class="bi bi-eye" style="color: #ffbb2c;"></i>
+                        <h3><a href="" class="stretched-link">Lorem Ipsum</a></h3>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="features-item">
+                        <i class="bi bi-infinity" style="color: #5578ff;"></i>
+                        <h3><a href="" class="stretched-link">Dolor Sitema</a></h3>
+                    </div>
+                </div><!-- End Feature Item -->
+
+                <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="features-item">
+                        <i class="bi bi-mortarboard" style="color: #e80368;"></i>
+                        <h3><a href="" class="stretched-link">Sed perspiciatis</a></h3>
+                    </div>
+                </div><!-- End Feature Item -->
+
+                <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="400">
+                    <div class="features-item">
+                        <i class="bi bi-nut" style="color: #e361ff;"></i>
+                        <h3><a href="" class="stretched-link">Magni Dolores</a></h3>
+                    </div>
+                </div><!-- End Feature Item -->
+
+                <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="500">
+                    <div class="features-item">
+                        <i class="bi bi-shuffle" style="color: #47aeff;"></i>
+                        <h3><a href="" class="stretched-link">Nemo Enim</a></h3>
+                    </div>
+                </div><!-- End Feature Item -->
+
+                <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="600">
+                    <div class="features-item">
+                        <i class="bi bi-star" style="color: #ffa76e;"></i>
+                        <h3><a href="" class="stretched-link">Eiusmod Tempor</a></h3>
+                    </div>
+                </div><!-- End Feature Item -->
+
+                <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="700">
+                    <div class="features-item">
+                        <i class="bi bi-x-diamond" style="color: #11dbcf;"></i>
+                        <h3><a href="" class="stretched-link">Midela Teren</a></h3>
+                    </div>
+                </div><!-- End Feature Item -->
+
+                <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="800">
+                    <div class="features-item">
+                        <i class="bi bi-camera-video" style="color: #4233ff;"></i>
+                        <h3><a href="" class="stretched-link">Pira Neve</a></h3>
+                    </div>
+                </div><!-- End Feature Item -->
+
+                <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="900">
+                    <div class="features-item">
+                        <i class="bi bi-command" style="color: #b2904f;"></i>
+                        <h3><a href="" class="stretched-link">Dirada Pack</a></h3>
+                    </div>
+                </div><!-- End Feature Item -->
+
+                <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="1000">
+                    <div class="features-item">
+                        <i class="bi bi-dribbble" style="color: #b20969;"></i>
+                        <h3><a href="" class="stretched-link">Moton Ideal</a></h3>
+                    </div>
+                </div><!-- End Feature Item -->
+
+                <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="1100">
+                    <div class="features-item">
+                        <i class="bi bi-activity" style="color: #ff5828;"></i>
+                        <h3><a href="" class="stretched-link">Verdo Park</a></h3>
+                    </div>
+                </div><!-- End Feature Item -->
+
+                <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="1200">
+                    <div class="features-item">
+                        <i class="bi bi-brightness-high" style="color: #29cc61;"></i>
+                        <h3><a href="" class="stretched-link">Flavor Nivelanda</a></h3>
+                    </div>
+                </div><!-- End Feature Item -->
+
+            </div>
+
+        </div>
+    }
+</section>
+<!-- /Features Section -->

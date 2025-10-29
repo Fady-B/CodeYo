@@ -2,7 +2,7 @@
 var long;
 var LoginAction = function () {
 
-    debugger
+    
     if (!$("#frmLogin").valid()) {
         return;
     }
@@ -15,14 +15,14 @@ var LoginAction = function () {
     var _frmLogin = $("#frmLogin").serialize();
 
     $("#signin").LoadingOverlay("show");
-    debugger
+    
     $.ajax({
         type: "POST",
         url: "/Account/Login",
         data: _frmLogin,
         success: function (Return) {
             //console.log(result); result: IsLockedOut: false, IsNotAllowed: false, RequiresTwoFactor: false, Succeeded: true
-            debugger
+            
             if (Return.IsSuccess) {
                 toastr.success(Return.AlertMessage);
                 location.href = "/Home/Index";

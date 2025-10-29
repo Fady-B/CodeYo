@@ -1,0 +1,194 @@
+﻿@using CodeYoDAL.DALHelpers;
+
+<div class="wrapper">
+    <div class="panel panel-hash">
+        <div class="panel-heading">
+
+            <div class="card shadow-lg hover-card m-inline-auto-p-0 m-1">
+                <div class="card-body">
+
+                    <div class="row">
+                        <div class="col-md-12 text-center ">
+                            <button type="button" onclick="AddEdit(0)" class="btn btn-success btn-block w-fit">
+                                <span class="bi bi-plus" style="color:white;"></span>
+                                <span>Add Teacher</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12 text-center ">
+                            <h5 class="text-center"><b>@MainMenu.Teachers.PageName</b></h5>
+                        </div>
+                    </div>
+                </div>
+
+                @* <div class="col-md-4 rg-3 row justify-content-evenly m-0 mt-1">
+                    <button type="button" id="btnFilter" onclick="GetByTeacher()" class="btn btn-success col-md-5">
+                        <span class="fa fa-filter" style="color:white;"></span>
+                        <span data-key="filter">Filter</span>
+                    </button>
+                    <button type="button" id="btnReset" onclick="ResetTeacherData()" class="btn btn-warning col-md-5">
+                        <span class="fa fa-retweet" style="color:white;"></span>
+                        <span data-key="reset">Reset</span>
+                    </button>
+                </div> *@
+
+
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-12 text-center ">
+                <div class="panel-body scroll panel-height table-wrap">
+
+
+                    <table class="table">
+                        <thead class="thead-primary">
+                            <tr>
+                                <th>TLD</th>
+                                <th>Duration</th>
+                                <th>Registration</th>
+                                <th>Renewal</th>
+                                <th>Transfer</th>
+                                <th>Register</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row" class="scope">.com</th>
+                                <td>1 Year</td>
+                                <td>$70.00</td>
+                                <td>$5.00</td>
+                                <td>$5.00</td>
+                                <td><a href="#" class="btn btn-primary">Sign Up</a></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="scope">.net</th>
+                                <td>1 Year</td>
+                                <td>$75.00</td>
+                                <td>$5.00</td>
+                                <td>$5.00</td>
+                                <td><a href="#" class="btn btn-primary">Sign Up</a></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="scope">.org</th>
+                                <td>1 Year</td>
+                                <td>$65.00</td>
+                                <td>$5.00</td>
+                                <td>$5.00</td>
+                                <td><a href="#" class="btn btn-primary">Sign Up</a></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="scope">.biz</th>
+                                <td>1 Year</td>
+                                <td>$60.00</td>
+                                <td>$5.00</td>
+                                <td>$5.00</td>
+                                <td><a href="#" class="btn btn-primary">Sign Up</a></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="scope">.info</th>
+                                <td>1 Year</td>
+                                <td>$50.00</td>
+                                <td>$5.00</td>
+                                <td>$5.00</td>
+                                <td><a href="#" class="btn btn-primary">Sign Up</a></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="scope border-bottom-0">.me</th>
+                                <td class="border-bottom-0">1 Year</td>
+                                <td class="border-bottom-0">$45.00</td>
+                                <td class="border-bottom-0">$5.00</td>
+                                <td class="border-bottom-0">$5.00</td>
+                                <td class="border-bottom-0"><a href="#" class="btn btn-primary">Sign Up</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+
+                    @* <table id="tblTeacher" class="table">
+                        <thead class="thead-primary">
+                            <tr>
+                                <th>Id</th>
+                                <th>Image</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                    </table> *@
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<style>
+    .panel-heading {
+        padding: 0px 0px 0px 5px;
+    }
+
+    .panel-body {
+        padding: 5px;
+    }
+
+    .h4 {
+        margin-top: 1px;
+        margin-bottom: 1px;
+    }
+
+    #tblTeacher th {
+        text-align: center;
+    }
+</style>
+
+@* <script src="~/js/Teacher/Teacher_CRUD.js"></script>
+<script src="~/js/Teacher/Teacher_Datatable.js"></script> *@
+
+<script>
+
+    // var GetByTeacher = function () {
+
+    //     var _TeacherRole = $("#TeacheRroleIdIndex").val();
+    //     var _SubjectId = $("#SubjectIdIndex").val();
+    //     var lang = localStorage.getItem("lang");
+    //     var _tblTeacher = $("#tblTeacher").DataTable();
+    //     _tblTeacher.clear();
+    //     _tblTeacher.destroy();
+    //     if (_TeacherRole == 0 && _SubjectId == 0) {
+
+    //         TeacherDataTableLoad(0, 0, lang);
+    //     }
+    //     else {
+    //         TeacherDataTableLoad(_TeacherRole, _SubjectId, lang);
+    //     }
+    //     DataTableCustomSearchBox('450px', 'Search Teacher');
+    // }
+
+    // var ResetTeacherData = function () {
+
+    //     $("#TeacheRroleIdIndex").val(0).trigger('change');
+    //     $("#SubjectIdIndex").val(0).trigger('change');
+    //     var lang = localStorage.getItem("lang");
+    //     var _tblTeacher = $("#tblTeacher").DataTable();
+    //     _tblTeacher.clear();
+    //     _tblTeacher.destroy();
+    //     TeacherDataTableLoad(0, 0, lang);
+    //     DataTableCustomSearchBox('450px', 'Search Teacher');
+    // }
+
+
+    // $(document).ready(function () {
+    //     $("#TeacheRroleIdIndex").select2();
+    //     $("#SubjectIdIndex").select2();
+    //     DataTableCustomSearchBox('450px', 'Search Teacher');
+
+    // });
+</script>
