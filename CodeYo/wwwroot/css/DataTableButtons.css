@@ -1,0 +1,47 @@
+﻿/* Style for the DataTable Edit button */
+.datatableeditebutton {
+    color: #fff;
+    background-color: #17a2b8; /* Primary info color */
+    border-color: #17a2b8; /* Border color matching the background */
+    font-size: 14px; /* Increased font size for better readability */
+    padding: 8px 16px; /* Sufficient padding for a larger button */
+    border-radius: 5px; /* Rounded corners for a modern look */
+    display: inline-flex; /* Ensures button is inline and flexible */
+    align-items: center; /* Aligns the icon and text properly */
+    justify-content: center; /* Centers the content */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: all 0.3s ease-in-out; /* Smooth transition for hover effect */
+}
+
+    /* Hover effect for the button */
+    .datatableeditebutton:hover {
+        background-color: #138496; /* Slightly darker shade for hover */
+        border-color: #138496; /* Darken the border as well */
+        transform: scale(1.05); /* Slight scale effect on hover for interactivity */
+    }
+
+    /* Active state effect */
+    .datatableeditebutton:active {
+        background-color: #117a8b; /* Even darker shade for active state */
+        border-color: #117a8b;
+        transform: scale(1); /* Remove scale effect when the button is clicked */
+    }
+
+    /* Adding a subtle shadow effect for a 3D look */
+    .datatableeditebutton:focus, .datatableeditebutton:active {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Adding an icon next to the button text (optional) */
+    .datatableeditebutton i {
+        margin-right: 5px; /* Space between the icon and the text */
+        font-size: 16px; /* Icon size */
+    }
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+    .datatableeditebutton {
+        font-size: 12px; /* Smaller font size on mobile */
+        padding: 6px 12px; /* Adjust padding for smaller screens */
+    }
+}

@@ -1,0 +1,172 @@
+﻿@model CodeYoDAL.ViewModels.TeacherViewModel;
+
+<div>
+    <div class="row">
+        <div class="col-md-12">
+            <form id="frmTeacher">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
+                <input type="hidden" asp-for="CreatedDate" />
+                <input type="hidden" asp-for="CreatedBy" />
+
+
+                <div class="row">
+                    <div class="col-6 col-sm-6">
+
+                        <div class="form-group row">
+                            <div class="input-group">
+                                <input required type="text" name="FullName" asp-for="FullName" autocomplete="off" class="input">
+                                <label asp-for="FullName" class="user-label">Full Name</label>
+                            </div>
+                            <span asp-validation-for="FullName" class="text-danger"></span>
+                            @* <label asp-for="FullName" class="col-sm-3 col-form-label">FullName</label>
+                            <div class="col-sm-9">
+                                <input asp-for="FullName" class="form-control" id="FullName" type="text" />
+                                <span asp-validation-for="FullName" class="text-danger"></span>
+                            </div> *@
+                        </div>
+
+
+                        <div class="form-group row">
+                            <div class="input-group">
+                                <input required type="text" name="PersonalPhoneNumber" asp-for="PersonalPhoneNumber" autocomplete="off" class="input">
+                                <label asp-for="PersonalPhoneNumber" class="user-label">Personal Phone Number</label>
+                            </div>
+                            <span asp-validation-for="PersonalPhoneNumber" class="text-danger"></span>
+                        </div>
+
+
+                    </div>
+
+                    <div class="col-6 col-sm-6">
+
+                        <div class="form-group row">
+                            <div class="input-group">
+                                <input required type="text" name="BusinessPhoneNumber" asp-for="BusinessPhoneNumber" autocomplete="off" class="input">
+                                <label asp-for="BusinessPhoneNumber" class="user-label">Business Phone Number</label>
+                            </div>
+                            <span asp-validation-for="BusinessPhoneNumber" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="input-group">
+                                <input required type="text" name="SubjectName" asp-for="SubjectName" autocomplete="off" class="input">
+                                <label asp-for="SubjectName" class="user-label">Subject Name</label>
+                            </div>
+                            <span asp-validation-for="SubjectName" class="text-danger"></span>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-sm-12">
+                            <button type="button" id="btnSave" onclick="Save()" class="btn btn-info">
+                                Save
+                            </button>
+                            <button type="button" id="btnClose" class="btn btn-danger" data-bs-dismiss="modal">
+                                Close
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+    .select2-container--default .select2-selection--multiple .select2-selection__choice {
+        color: black;
+    }
+</style>
+
+<script src="/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+
+<script>
+    $(document).ready(function () {
+        
+    });
+</script>
+
+<!--
+<script>
+    $(document).ready(function () {
+        $('#SessionId').change(function () {
+            var _SessionId = $("#SessionId").val();
+
+            $.ajax({
+                type: "GET",
+                url: "/Teacher/LoadEducationalLevelBySessionId?SessionId=" + _SessionId,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    $('#EducationLevelId').empty();
+                    $('#SectionId').empty();
+                    $("#EducationLevelId").append("<option disabled selected data-key=' select ' > SELECT  </option>");
+                    for (var i = 0; i < data.length; i++) {
+                        var _EducationLevelId = document.getElementById("EducationLevelId");
+                        var _option = document.createElement("option");
+                        _option.text = data[i].Name;
+                        _option.value = data[i].Id;
+                        _EducationLevelId.add(_option);
+                    }
+                },
+                error: function (errormessage) {
+                    SwalSimpleAlert(errormessage.responseText, "warning");
+                }
+            });
+        });
+    
+        $('#EducationLevelId').change(function () {
+
+            var _EducationLevelId = $("#EducationLevelId").val();
+
+            $.ajax({
+                type: "GET",
+                url: "/Teacher/LoadSectionByEducationalLevelId?EducationalLevelId=" + _EducationLevelId,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+
+                    $('#SectionId').empty();
+                    $("#SectionId").append("<option disabled selected data-key=' select ' > SELECT  </option>");
+                    for (var i = 0; i < data.length; i++) {
+                        var _SectionId = document.getElementById("SectionId");
+                        var _option = document.createElement("option");
+                        _option.text = data[i].Name;
+                        _option.value = data[i].Id;
+                        _SectionId.add(_option);
+                    }
+                },
+                error: function (errormessage) {
+                    SwalSimpleAlert(errormessage.responseText, "warning");
+                }
+            });
+        });
+    
+        $('#SectionId').change(function () {
+
+            var _SectionId = $("#SectionId").val();
+
+            $.ajax({
+                type: "GET",
+                url: "/Teacher/LoadClassesBySectionId?SectionId=" + _SectionId,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    for (var i = 0; i < data.length; i++) {
+                        var _Classes = document.getElementById("Classes");
+                        var _option = document.createElement("option");
+                        _option.text = data[i].Name;
+                        _option.value = data[i].Id;
+                        _Classes.add(_option);
+                    }
+                },
+                error: function (errormessage) {
+                    SwalSimpleAlert(errormessage.responseText, "warning");
+                }
+            });
+        });
+    });
+</script>-->

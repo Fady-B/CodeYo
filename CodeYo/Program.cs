@@ -1,3 +1,5 @@
+using CodeYoBL.IServices;
+using CodeYoBL.Services;
 using CodeYoDAL.Data;
 using CodeYoDAL.Models;
 using Microsoft.AspNetCore.Identity;
@@ -38,6 +40,10 @@ builder.Services.AddControllers()
     });
 
 builder.Services.AddControllersWithViews();
+builder.Services.AddHttpContextAccessor();
+
+builder.Services.AddScoped<IDatatableGridItemService, DatatableGridItemService>();
+
 
 var app = builder.Build();
 

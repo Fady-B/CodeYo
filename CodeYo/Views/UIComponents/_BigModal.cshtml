@@ -1,0 +1,32 @@
+﻿<div class="modal fade" id="BigModal" role="dialog" style="opacity: 1;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header" style="display: block;">
+                <div class="row">
+                    <div class="row col-md-12" style="justify-content: space-between;">
+                        <h3 id="titleBigModal" style="width: fit-content;" class="modal-title directiondiv">Title</h3>
+                        <button type="button" class="btn btn-danger btnClose" data-dismiss="modal" style="width:fit-content;">X</button>
+                    </div>
+                </div>
+                @* <div class="col-md-8">
+                    <h3 id="titleBigModal" class="modal-title directiondiv">Title</h3>
+                </div>
+                <div class="col-md-pull-4 pull-right">
+                    <button type="button" class="btn btn-danger btnClose" data-dismiss="modal">X</button>
+                </div> *@
+            </div>
+            <div class="modal-body" id="BigModalDiv">
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $(".btnClose").on("click", function () {
+            $("#BigModal").modal("hide");
+        });
+    });
+    
+</script>

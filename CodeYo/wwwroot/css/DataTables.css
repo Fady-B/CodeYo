@@ -1,0 +1,82 @@
+﻿/* تنسيق أزرار DataTables */
+.dt-buttons .dt-button {
+    background: linear-gradient(135deg, #007bff, #0056b3) !important;
+    color: white !important;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 14px;
+    margin-right: 6px;
+    font-weight: 500;
+    font-size: 14px;
+    box-shadow: 0 2px 6px rgba(0, 123, 255, 0.3);
+    transition: all 0.3s ease;
+}
+
+    .dt-buttons .dt-button:hover {
+        background: linear-gradient(135deg, #3399ff, #007bff);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 10px rgba(0, 123, 255, 0.4);
+    }
+
+    .dt-buttons .dt-button:active {
+        transform: translateY(0);
+        box-shadow: 0 2px 6px rgba(0, 123, 255, 0.2);
+    }
+
+/* تخصيص حقل البحث */
+.dataTables_filter {
+    margin-bottom: 10px;
+}
+
+    .dataTables_filter label {
+        font-weight: 500;
+        color: #333;
+    }
+
+    .dataTables_filter input {
+        border: 1px solid #007bff !important;
+        border-radius: 6px !important;
+        padding: 6px 10px !important;
+        outline: none;
+        transition: all 0.3s ease;
+    }
+
+        .dataTables_filter input:focus {
+            box-shadow: 0 0 6px rgba(0, 123, 255, 0.4);
+            border-color: #0056b3;
+        }
+
+/* تحسين شكل الجدول نفسه */
+table.dataTable thead {
+    background-color: #007bff;
+    color: #fff;
+    font-weight: 600;
+}
+
+    table.dataTable thead th {
+        text-align: center;
+    }
+
+table.dataTable tbody tr:hover {
+    background-color: rgba(0, 123, 255, 0.1);
+}
+
+/* ضبط الـ pagination */
+.dataTables_paginate .paginate_button {
+    background: #f1f1f1;
+    border: none;
+    border-radius: 4px;
+    color: #007bff !important;
+    margin: 0 2px;
+    transition: all 0.3s;
+}
+
+    .dataTables_paginate .paginate_button:hover {
+        background: #007bff;
+        color: white !important;
+    }
+
+    .dataTables_paginate .paginate_button.current {
+        background: #007bff !important;
+        color: white !important;
+    }

@@ -1,0 +1,25 @@
+﻿<div class="modal fade" id="ExtraBigModal" role="dialog" style="opacity: 1;">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="col-sm-8">
+                    <h3 id="titleExtraBigModal" class="modal-title directiondiv">Title</h3>
+                </div>
+                <div class="col-sm-pull-4 pull-right">
+                    <button type="button" class="btn btn-sm btn-danger btnClose" data-dismiss="modal">X</button>
+                </div>
+            </div>
+            <div class="modal-body" id="ExtraBigModalDiv">
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $(".btnClose").on("click", function () {
+            $("#ExtraBigModal").modal("hide");
+        });
+    });
+</script>

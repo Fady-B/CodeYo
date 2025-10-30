@@ -1,0 +1,25 @@
+﻿<div class="modal fade" id="EmailConfigModal" role="dialog" style="opacity: 1;">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header" style="display: block;">
+                <div class="col-md-8">
+                    <h3 id="titleEmailConfigModal" class="modal-title">Title</h3>
+                </div>
+                <div class="col-md-pull-4 pull-right">
+                    <button type="button" class="btn btn-danger btnClose" data-dismiss="modal">X</button>
+                </div>
+            </div>
+            <div class="modal-body" id="bodyEmailConfig">
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $(".btnClose").on("click", function () {
+            $("#EmailConfigModal").modal("hide");
+        });
+    });
+</script>
