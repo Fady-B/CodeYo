@@ -95,23 +95,6 @@ namespace CodeYoBL.Services
 
                 return query.OrderByDescending(x => x.CreatedDate);
 
-
-                //return (from _Student in _context.Students
-                //        where !_Student.Cancelled
-                //        select new StudentsViewModel
-                //        {
-                //            Id = _Student.Id,
-                //            ArName = _Student.ArName,
-                //            EnName = _Student.EnName,
-                //            UserName = _Student.UserName,
-                //            SerialNumber = _Student.SerialNumber,
-                //            Password = _Student.Password,
-
-                //            CreatedDate = _Student.CreatedDate,
-                //            CreatedBy = _Student.CreatedBy,
-                //            ModifiedDate = _Student.ModifiedDate,
-                //            ModifiedBy = _Student.ModifiedBy
-                //        }).OrderByDescending(x => x.Id);
             }
             catch (Exception ex)
             {

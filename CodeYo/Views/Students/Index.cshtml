@@ -9,6 +9,12 @@
                 <div class="card-body">
                     <div class="row mb-3">
                         <div class="col-md-12 text-center ">
+                            <h5 class="text-center"><b>@MainMenu.Students.PageName</b></h5>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-12 text-center ">
                             <button type="button" onclick="AddEdit(0)" class="btn btn-success btn-block w-fit">
                                 <span class="bi bi-plus" style="color:white;"></span>
                                 <span>Add Student</span>
@@ -16,11 +22,28 @@
                         </div>
                     </div>
 
-                    <div class="row">
+                    <div class="row mb-3">
                         <div class="col-md-12 text-center ">
-                            <h5 class="text-center"><b>@MainMenu.Students.PageName</b></h5>
+                            <h5 class="text-center"><b>Students data management via Excel</b></h5>
                         </div>
                     </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-12 justify-content-center row row-gap-3 column-gap-3">
+
+                            <button type="button" onclick="DownloadEmptyExcelTemplate()" class="btn btn-outline-info btn-block w-fit">
+                                <span class="bi bi-cloud-download"></span>
+                                <span>Download Empty Excel Template</span>
+                            </button>
+
+                            <button type="button" onclick="UploadExcelSheet()" class="btn btn-outline-warning btn-block w-fit">
+                                <span class="bi bi-cloud-upload"></span>
+                                <span>Upload Students Data</span>
+                            </button>
+                        </div>
+                    </div>
+
+
                 </div>
 
 
@@ -55,3 +78,49 @@
 
 <script src="~/js/Student/Student_CRUD.js"></script>
 <script src="~/js/Student/Student_Datatable.js"></script>
+
+<script>
+    function DownloadEmptyExcelTemplate() {
+        // document.getElementById("LoaderPenciel").style.display = "flex";
+        $.ajax({
+            type: "GET",
+            url: "/Excel/CreateStudntExcelSheet",
+            success: function (result) {
+                var _base64ToArrayBuffer = base64ToArrayBuffer(result.DocByte);
+                saveByteArray(result.FileName, _base64ToArrayBuffer, result.ContentType);
+                // document.getElementById("LoaderPenciel").style.display = "none";
+            },
+            error: function (errormessage) {
+                SwalSimpleAlert(errormessage.responseText, "warning");
+                // document.getElementById("LoaderPenciel").style.display = "none";
+            }
+        });
+    }
+
+    var base64ToArrayBuffer = function (base64) {
+        var binaryString = window.atob(base64);
+        var binaryLen = binaryString.length;
+        var bytes = new Uint8Array(binaryLen);
+        for (var i = 0; i < binaryLen; i++) {
+            var ascii = binaryString.charCodeAt(i);
+            bytes[i] = ascii;
+        }
+        return bytes;
+    }
+
+    var saveByteArray = function (reportName, byte, _type) {
+        var blob = new Blob([byte], { type: _type });
+        var link = document.createElement('a');
+        link.href = window.URL.createObjectURL(blob);
+        var fileName = reportName;
+        link.download = fileName;
+        link.click();
+    };
+
+
+    var UploadExcelSheet = function () {
+        var url = "/Excel/UploadExcelPartial";
+        $('#titleMediumModal').html("Upload Students Data");
+        loadMediumModal(url);
+    };
+</script>

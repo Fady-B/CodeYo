@@ -17,10 +17,10 @@ html {
   min-height: 100%;
 }
 
-body {
-  margin-bottom: 60px;
-}
-
 .pull-right{
     margin-left: auto;
+}
+
+.w-fit {
+    width: fit-content !important;
 }

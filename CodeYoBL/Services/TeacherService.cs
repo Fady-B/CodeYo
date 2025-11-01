@@ -109,7 +109,43 @@ namespace CodeYoBL.Services
 
         public async Task<TeacherViewModel> GetAsync(Guid Id)
         {
-            return await _context.Teachers.Where(t => t.Id == Id && !t.Cancelled).FirstOrDefaultAsync() ?? new TeacherViewModel();
+            var _teacher = await _context.Teachers
+                .Include(s => s.TeacherStudents)
+                .ThenInclude(ts => ts.Student)
+                .Where(t => t.Id == Id && !t.Cancelled)
+                .Select(t => new TeacherViewModel
+                {
+                    Id = t.Id,
+                    FullName = t.FullName,
+                    SubjectName = t.SubjectName,
+                    BusinessPhoneNumber = t.BusinessPhoneNumber,
+                    PersonalPhoneNumber = t.PersonalPhoneNumber,
+                    
+                    CreatedDate = t.CreatedDate,
+                    CreatedBy = t.CreatedBy,
+                    ModifiedBy = t.ModifiedBy,
+                    ModifiedDate = t.ModifiedDate,
+                    Cancelled = t.Cancelled,
+                    //TeacherStudents = t.TeacherStudents
+                    //    .Where(ts => !ts.Student.Cancelled)
+                    //    .Select(ts => new StudentsViewModel
+                    //    {
+                    //        Id = ts.Student.Id,
+                    //        ArName = ts.Student.ArName,
+                    //        EnName = ts.Student.EnName,
+                    //        SerialNumber = ts.Student.SerialNumber,
+                    //        UserName = ts.Student.UserName,
+                    //        Password = ts.Student.Password,
+                            
+                    //        CreatedDate = ts.Student.CreatedDate,
+                    //        CreatedBy = ts.Student.CreatedBy,
+                    //        ModifiedBy = ts.Student.ModifiedBy,
+                    //        ModifiedDate = ts.Student.ModifiedDate
+                    //    }).ToList(),
+                    StudentsCount = t.TeacherStudents.Where(ts => !ts.Student.Cancelled).Count(),
+                }).FirstOrDefaultAsync();
+
+            return _teacher ?? new TeacherViewModel();
         }
     }
 }

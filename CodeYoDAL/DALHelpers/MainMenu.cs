@@ -26,5 +26,14 @@ namespace CodeYoDAL.DALHelpers
             public const string ControllerName = "Students";
             public const string ActionName = "Index";
         }
+
+        public static class Home
+        {
+            public const string PageName = "Home";
+            public const string RoleName = "Home Page";
+            public const string Path = "/Home/Index";
+            public const string ControllerName = "Students";
+            public const string ActionName = "Index";
+        }
     }
 }

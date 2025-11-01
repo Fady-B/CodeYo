@@ -47,7 +47,6 @@
 
 </section>
 <!-- /Hero Section -->
-
 <!-- Features Section -->
 <section class="features section" id="NavigationSection">
     @if (SignInManager.IsSignedIn(User))
@@ -55,6 +54,16 @@
         <div class="container">
 
             <div class="row gy-4">
+
+                @* @if (User.IsInRole(ApplicationRoles.HomePage) || User.IsInRole(ApplicationRoles.SuperAdmin))
+                { *@
+                <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="features-item">
+                        <i class="bi bi-house-fill" style="color: #29cc61;"></i>
+                        <h3><a href="@MainMenu.Home.Path" class="stretched-link">@MainMenu.Home.PageName</a></h3>
+                    </div>
+                </div>
+                @* } *@
 
                 @if (User.IsInRole(ApplicationRoles.Teachers) || User.IsInRole(ApplicationRoles.SuperAdmin))
                 {

@@ -1,4 +1,4 @@
-﻿@model CodeYoDAL.ViewModels.TeacherViewModel;
+﻿@model CodeYoDAL.ViewModels.StudentsViewModel;
 
 <div class="row">
     <div class="col-md-12">
@@ -8,20 +8,24 @@
                 <td>@Model.Id</td>
             </tr>
             <tr>
-                <th>Full Name</th>
-                <td>@Model.FullName</td>
+                <th>Ar Name</th>
+                <td>@Model.ArName</td>
             </tr>
             <tr>
-                <th>Personal Phone Number</th>
-                <td>@Model.PersonalPhoneNumber</td>
+                <th>En Name</th>
+                <td>@Model.EnName</td>
             </tr>
             <tr>
-                <th>Business Phone Number</th>
-                <td>@Model.BusinessPhoneNumber</td>
+                <th>SerialNumber</th>
+                <td>@Model.SerialNumber</td>
             </tr>
             <tr>
-                <th>Subject Name</th>
-                <td>@Model.SubjectName</td>
+                <th>UserName</th>
+                <td>@Model.UserName</td>
+            </tr>
+            <tr>
+                <th>Password</th>
+                <td>@Model.Password</td>
             </tr>
             <tr>
                 <th>Creation Date</th>
@@ -39,6 +43,34 @@
                 <th>Modified By</th>
                 <td>@Model.ModifiedBy</td>
             </tr>
+        </table>
+    </div>
+    <div class="col-md-12 text-center"><b class="text-center">Student Teacher</b></div>
+    <div class="col-md-12">
+        <table>
+            <thead>
+                <tr>
+                    <th>Teacher Name</th>
+                    <th>Teacher Subject</th>
+                    <th>Business Phone Number</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var teacher in Model.StudentTeachers)
+                {
+                    <tr>
+                        <td>
+                            @teacher.FullName
+                        </td>
+                        <td>
+                            @teacher.SubjectName
+                        </td>
+                        <td>
+                            @teacher.BusinessPhoneNumber
+                        </td>
+                    </tr>
+                }
+            </tbody>
         </table>
     </div>
 </div>

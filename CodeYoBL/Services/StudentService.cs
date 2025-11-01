@@ -68,23 +68,6 @@ namespace CodeYoBL.Services
                     await _context.SaveChangesAsync();
 
                     _Result.AlertMessage = $"Student updated successfully with the name of: {_Student.EnName}.";
-
-                    //_Student = await _context.Students.FindAsync(vm.Id);
-                    //if (_Student == null)
-                    //{
-                    //    _Result.IsSuccess = false;
-                    //    _Result.AlertMessage = "Operation Failed: Couldn't find the student!";
-                    //    return _Result;
-                    //}
-                    //vm.CreatedDate = _Student.CreatedDate;
-                    //vm.CreatedBy = _Student.CreatedBy;
-                    //vm.ModifiedDate = DateTime.Now;
-                    //vm.ModifiedBy = _UserName;
-
-                    //_context.Entry(_Student).CurrentValues.SetValues(vm);
-                    //await _context.SaveChangesAsync();
-
-                    //_Result.AlertMessage = $"Student updated successfully with the name of: {_Student.EnName}.";
                 }
                 else //Add
                 {
@@ -106,7 +89,6 @@ namespace CodeYoBL.Services
                             });
                         }
                     }
-
 
                     _context.Add(_Student);
                     await _context.SaveChangesAsync();
@@ -172,10 +154,10 @@ namespace CodeYoBL.Services
                     SerialNumber = s.SerialNumber,
                     UserName = s.UserName,
                     Password = s.Password,
-                    CreatedDate = DateTime.Now,
+                    CreatedDate = s.CreatedDate,
                     CreatedBy = s.CreatedBy,
                     ModifiedBy = s.ModifiedBy,
-                    ModifiedDate = DateTime.Now,
+                    ModifiedDate = s.ModifiedDate,
                     Cancelled = s.Cancelled,
                     StudentTeachers = s.TeacherStudents
                         .Where(ts => !ts.Teacher.Cancelled)
@@ -196,7 +178,6 @@ namespace CodeYoBL.Services
 
             return student ?? new StudentsViewModel();
 
-            //return await _context.Students.Where(t => t.Id == Id && !t.Cancelled).FirstOrDefaultAsync() ?? new StudentsViewModel();
         }
     }
 }

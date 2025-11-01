@@ -11,15 +11,11 @@
     loadExtraBigModal(url);
 };
 
-
-
 var Details = function (id) {
     var url = "/Students/Details?Id=" + id;
-    $('#titleBigModal').html("Teacher Details");
+    $('#titleBigModal').html("Student Details");
     loadBigModal(url);
 };
-
-
 
 var Save = function () {
     if (!$("#frmStudent").valid()) {
@@ -34,7 +30,6 @@ var Save = function () {
         url: "/Students/AddEdit",
         data: _frmStudent,
         success: function (result) {
-            debugger
             $("#btnSave").html("Save");
             $('#btnSave').removeAttr('disabled');
             if (result.IsSuccess) {

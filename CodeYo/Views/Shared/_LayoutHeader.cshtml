@@ -1,18 +1,18 @@
 ﻿@using Microsoft.AspNetCore.Identity
+@using CodeYoDAL.DALHelpers;
 @inject SignInManager<ApplicationUser> SignInManager
 
 <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
-        <a href="index.html" class="logo d-flex align-items-center">
+        <a href="@MainMenu.Home.Path" class="logo d-flex align-items-center">
             <!-- Uncomment the line below if you also wish to use an image logo -->
-            <!-- <img src="assets/img/logo.png" alt=""> -->
             <h1 class="sitename">Code-Yo</h1>
         </a>
 
         <nav id="navmenu" class="navmenu">
             <ul>
-                <li><a asp-controller="Home" asp-action="Index" class="active">Home</a></li>
+                @* <li><a asp-controller="Home" asp-action="Index" class="active">Home</a></li> *@
 
                 @if (SignInManager.IsSignedIn(User))
                 {
@@ -45,13 +45,9 @@
                     </li>
                     -->
                     <li>
-                        <a href="">Hello @User.Identity?.Name</a>
+                        <a href="" class="active">Hello @User.Identity?.Name</a>
                     </li>
-                    <li>
-                        <form class="form-inline" id="LogOutFormMainLayout" asp-controller="Account" asp-action="Logout" method="post" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                            <a onclick="document.getElementById('LogOutFormMainLayout').submit();" class="nav-link btn btn-link">Logout</a>
-                        </form>
-                    </li>
+                    <li><a onclick="document.getElementById('LogOutFormMainLayout').submit();">Logout</a></li>
                 }
                 else
                 {
@@ -63,4 +59,6 @@
         </nav>
 
     </div>
+    <form class="form-inline" id="LogOutFormMainLayout" asp-controller="Account" asp-action="Logout" method="post" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+    </form>
 </header>
