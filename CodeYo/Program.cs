@@ -39,10 +39,18 @@ builder.Services.AddControllers()
         options.JsonSerializerOptions.PropertyNamingPolicy = null;
     });
 
-builder.Services.AddControllersWithViews();
+//builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews(options =>
+{
+    options.ModelBinderProviders.Insert(0, new EmptyGuidToNullModelBinderProvider());
+});
 builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddScoped<IDatatableGridItemService, DatatableGridItemService>();
+builder.Services.AddScoped<ITeacherService, TeacherService>();
+builder.Services.AddScoped<IStudentService, StudentService>();
+builder.Services.AddScoped<ICommonService, CommonService>();
+
 
 
 var app = builder.Build();

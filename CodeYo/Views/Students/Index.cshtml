@@ -1,0 +1,57 @@
+﻿@using CodeYoDAL.DALHelpers;
+@{
+    ViewData["Title"] = MainMenu.Students.PageName;
+}
+<div class="wrapper">
+    <div class="panel panel-hash">
+        <div class="panel-heading">
+            <div class="card shadow-lg hover-card m-inline-auto-p-0 m-1">
+                <div class="card-body">
+                    <div class="row mb-3">
+                        <div class="col-md-12 text-center ">
+                            <button type="button" onclick="AddEdit(0)" class="btn btn-success btn-block w-fit">
+                                <span class="bi bi-plus" style="color:white;"></span>
+                                <span>Add Student</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12 text-center ">
+                            <h5 class="text-center"><b>@MainMenu.Students.PageName</b></h5>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <div class="panel-body scroll panel-height table-wrap">
+                    <table id="tblStudents" class="display nowrap" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Ar Name</th>
+                                <th>En Name</th>
+                                <th>Serial Number</th>
+                                <th>Username</th>
+                                <th>Password</th>
+                                <th>Student Teachers Count</th>
+                                <th>Creation Date</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/js/Student/Student_CRUD.js"></script>
+<script src="~/js/Student/Student_Datatable.js"></script>

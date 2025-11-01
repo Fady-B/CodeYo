@@ -77,12 +77,13 @@ var loadExtraBigModal = function (url) {
 };
 
 function InitialSelect2(scope) {
+    debugger
     const $scope = scope || $(document);
     const $modal = $scope.closest('.modal');
     const parent = $modal.length ? $modal : $(document.body);
 
     $scope.find('select.select2').each(function () {
-
+        debugger
         if ($(this).hasClass("select2-hidden-accessible")) {
             $(this).select2('destroy');
         }
@@ -95,11 +96,11 @@ function InitialSelect2(scope) {
     });
 }
 function InitialPartialSelect2(Container) {
-
+    
     const $scope = Container || $(document);
     const parent = $scope.length ? $scope : $(document.body).closest('.modal');
     $scope.find('select.select2').each(function () {
-
+        
         if ($(this).hasClass("select2-hidden-accessible")) {
             $(this).select2('destroy');
         }
@@ -111,6 +112,34 @@ function InitialPartialSelect2(Container) {
         });
     });
 }
+
+$(document).ready(function () {
+
+    $('.input').each(function () {
+        if ($(this).val().trim() !== '') $(this).addClass('has-value');
+        else $(this).removeClass('has-value');
+    });
+
+    $(document).on('input', '.input', function () {
+        if ($(this).val().trim() !== '') $(this).addClass('has-value');
+        else $(this).removeClass('has-value');
+    });
+});
+function checkInputs() {
+    $('.input').each(function () {
+        if ($(this).val().trim() !== '') $(this).addClass('has-value');
+        else $(this).removeClass('has-value');
+    });
+}
+$('#ExtraBigModal').on('shown.bs.modal', function () {
+    checkInputs();
+});
+$('#BigModal').on('shown.bs.modal', function () {
+    checkInputs();
+});
+$('#MediumModal').on('shown.bs.modal', function () {
+    checkInputs();
+});
 
 var ShowBootstrapAlert = function (AlertType, AlertTitle, AlertMessage) {
 

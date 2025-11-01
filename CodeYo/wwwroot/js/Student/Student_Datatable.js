@@ -1,11 +1,6 @@
 $(document).ready(function () {
-    if (!$.fn.DataTable.isDataTable('#tblTeacher')) {
-        TeacherDataTableLoad();
-    }
-});
 
-function TeacherDataTableLoad() {
-    $('#tblTeacher').DataTable({
+    $('#tblStudents').DataTable({
         processing: true,
         serverSide: true,
         filter: true,
@@ -19,7 +14,7 @@ function TeacherDataTableLoad() {
             'pageLength', 'excelHtml5', 'pdfHtml5', 'print'
         ],
         ajax: {
-            url: '/Teachers/GetDataTabelData',
+            url: '/Students/GetDataTabelData',
             type: 'POST',
             datatype: 'json'
         },
@@ -30,11 +25,12 @@ function TeacherDataTableLoad() {
                     return "<button class='bi-eye btn btn-primary' title='Show Details' onclick=Details('" + row.Id + "');></button>";
                 }
             },
-            { data: "FullName", name: "FullName" },
-            { data: "PersonalPhoneNumber", name: "PersonalPhoneNumber" },
-            { data: "BusinessPhoneNumber", name: "BusinessPhoneNumber" },
-            { data: "SubjectName", name: "SubjectName" },
-            { data: "StudentsCount", name: "StudentsCount" },
+            { data: "ArName", name: "ArName" },
+            { data: "EnName", name: "EnName" },
+            { data: "SerialNumber", name: "SerialNumber" },
+            { data: "UserName", name: "UserName" },
+            { data: "Password", name: "Password" },
+            { data: "TeachersCount", name: "TeachersCount" },
             {
                 data: "CreatedDate",
                 name: "CreatedDate",
@@ -60,11 +56,11 @@ function TeacherDataTableLoad() {
             }
         ],
         columnDefs: [
-            { targets: [7, 8], orderable: false }
+            { targets: [8, 9], orderable: false }
         ],
         lengthMenu: [
-            [10, 20, 50, 100, 200, 500, 700, 1000],
-            [10, 20, 50, 100, 200, 500, 700, 1000]
+            [10, 20, 50, 100, 200, 500, 700, 1000, 1500, 2000],
+            [10, 20, 50, 100, 200, 500, 700, 1000, 1500, 2000]
         ]
     });
-}
+});

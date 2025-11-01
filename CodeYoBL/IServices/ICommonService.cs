@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace CodeYoBL.IServices
 {
-    public interface IDatatableGridItemService
+    public interface ICommonService
     {
-        IQueryable<TeacherViewModel> GetTeachersGridItem();
-        IQueryable<StudentsViewModel> GetStudentsGridItem();
+        IQueryable<ItemDropdownListViewModel> GetTeachersDdl();
     }
 }

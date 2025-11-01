@@ -19,20 +19,22 @@ namespace SchoolMS.Controllers
 {
     [Authorize]
     //[Route("[controller]/[action]")]
-    public class TeachersController : Controller
+    public class StudentsController : Controller
     {
         private readonly ApplicationDbContext _context;
         IDatatableGridItemService _iDatatableGridItemService;
-        ITeacherService _iTeacherService;
+        IStudentService _iStudentService;
+        ICommonService _iCommon;
 
-        public TeachersController(ApplicationDbContext context, IDatatableGridItemService IDatatableGridItemService, ITeacherService iTeacherService)
+        public StudentsController(ApplicationDbContext context, IDatatableGridItemService IDatatableGridItemService, IStudentService iStudentService, ICommonService ICommonService)
         {
             _context = context;
             _iDatatableGridItemService = IDatatableGridItemService;
-            _iTeacherService = iTeacherService;
+            _iStudentService = iStudentService;
+            _iCommon = ICommonService;
         }
 
-        [Authorize(Roles = CodeYoDAL.DALHelpers.MainMenu.Teachers.RoleName)]
+        [Authorize(Roles = CodeYoDAL.DALHelpers.MainMenu.Students.RoleName)]
         [HttpGet]
         public IActionResult Index()
         {
@@ -56,7 +58,7 @@ namespace SchoolMS.Controllers
                 int skip = start != null ? Convert.ToInt32(start) : 0;
                 int resultTotal = 0;
 
-                var _GetGridItem = _iDatatableGridItemService.GetTeachersGridItem();
+                var _GetGridItem = _iDatatableGridItemService.GetStudentsGridItem();
 
                 //Sorting
                 if (!(string.IsNullOrEmpty(sortColumn) && string.IsNullOrEmpty(sortColumnAscDesc)))
@@ -69,11 +71,12 @@ namespace SchoolMS.Controllers
                 {
                     searchValue = searchValue.ToLower();
                     _GetGridItem = _GetGridItem.Where(obj => obj.Id.ToString().Contains(searchValue)
-                    || obj.FullName.ToLower().Contains(searchValue)
-                    || obj.PersonalPhoneNumber.ToLower().Contains(searchValue)
-                    || obj.BusinessPhoneNumber.ToLower().Contains(searchValue)
-                    || obj.SubjectName.ToLower().Contains(searchValue)
-                    || obj.StudentsCount.ToString().Contains(searchValue)
+                    || obj.ArName.ToLower().Contains(searchValue)
+                    || obj.EnName.ToLower().Contains(searchValue)
+                    || obj.SerialNumber.ToLower().Contains(searchValue)
+                    || obj.UserName.ToLower().Contains(searchValue)
+                    || obj.Password.ToLower().Contains(searchValue)
+                    || obj.TeachersCount.ToString().ToLower().Contains(searchValue)
                     || obj.CreatedBy.ToLower().Contains(searchValue)
                     || obj.ModifiedBy.ToLower().Contains(searchValue)
                     || obj.ModifiedDate.ToString().Contains(searchValue)
@@ -89,7 +92,6 @@ namespace SchoolMS.Controllers
             {
                 throw ex;
             }
-
         }
 
         [HttpGet]
@@ -97,12 +99,13 @@ namespace SchoolMS.Controllers
         {
             try
             {
-                TeacherViewModel vm = new TeacherViewModel();
-                Guid _TeacherId;
-                if (Guid.TryParse(Id, out _TeacherId))
+                StudentsViewModel vm = new StudentsViewModel();
+                Guid _StudentId;
+                if (Guid.TryParse(Id, out _StudentId))
                 {
-                    vm = await _iTeacherService.GetAsync(_TeacherId);
+                    vm = await _iStudentService.GetAsync(_StudentId);
                 }
+                ViewBag.DdlTeachers = new SelectList(_iCommon.GetTeachersDdl(), "Id", "Name");
                 return PartialView("_AddEdit", vm);
             }
             catch (Exception ex)
@@ -112,17 +115,17 @@ namespace SchoolMS.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddEdit(TeacherViewModel vm)
+        public async Task<IActionResult> AddEdit(StudentsViewModel vm)
         {
             JsonResultViewModel _response = new();
             try
             {
                 if (vm.Id == Guid.Empty)
                     ModelState.Remove("Id");
-                
+
                 if (ModelState.IsValid)
                 {
-                    _response = await _iTeacherService.AddEditAsync(vm);
+                    _response = await _iStudentService.AddEditAsync(vm);
                 }
                 else
                 {
@@ -145,11 +148,11 @@ namespace SchoolMS.Controllers
         {
             try
             {
-                TeacherViewModel vm = new TeacherViewModel();
-                Guid _TeacherId;
-                if (Guid.TryParse(Id, out _TeacherId))
+                StudentsViewModel vm = new StudentsViewModel();
+                Guid _StudentId;
+                if (Guid.TryParse(Id, out _StudentId))
                 {
-                    vm = await _iTeacherService.GetAsync(_TeacherId);
+                    vm = await _iStudentService.GetAsync(_StudentId);
                 }
                 return PartialView("_Details", vm);
             }
@@ -165,10 +168,10 @@ namespace SchoolMS.Controllers
             JsonResultViewModel _response = new();
             try
             {
-                Guid _TeacherId;
-                if (Guid.TryParse(Id, out _TeacherId))
+                Guid _StudentId;
+                if (Guid.TryParse(Id, out _StudentId))
                 {
-                    _response = await _iTeacherService.DeleteAsync(_TeacherId);
+                    _response = await _iStudentService.DeleteAsync(_StudentId);
                 }
                 else
                 {

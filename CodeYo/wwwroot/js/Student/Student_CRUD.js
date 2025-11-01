@@ -1,6 +1,6 @@
 ﻿var AddEdit = function (id) {
 
-    var url = "/Teachers/AddEdit?Id=" + id;
+    var url = "/Students/AddEdit?Id=" + id;
     if (id != "0") {
         $('#titleExtraBigModal').html("Edit Teacher");
     }
@@ -14,7 +14,7 @@
 
 
 var Details = function (id) {
-    var url = "/Teachers/Details?Id=" + id;
+    var url = "/Students/Details?Id=" + id;
     $('#titleBigModal').html("Teacher Details");
     loadBigModal(url);
 };
@@ -22,19 +22,19 @@ var Details = function (id) {
 
 
 var Save = function () {
-
-    if (!$("#frmTeacher").valid()) {
+    if (!$("#frmStudent").valid()) {
         return;
     }
-    var _frmTeacher = $("#frmTeacher").serialize();
+    var _frmStudent = $("#frmStudent").serialize();
 
     $("#btnSave").html("Saving...");
     $('#btnSave').attr('disabled', 'disabled');
     $.ajax({
         type: "POST",
-        url: "/Teachers/AddEdit",
-        data: _frmTeacher,
+        url: "/Students/AddEdit",
+        data: _frmStudent,
         success: function (result) {
+            debugger
             $("#btnSave").html("Save");
             $('#btnSave').removeAttr('disabled');
             if (result.IsSuccess) {
@@ -43,7 +43,7 @@ var Save = function () {
                     icon: "success"
                 }).then(function () {
                     document.getElementById("btnClose").click();
-                    $('#tblTeacher').DataTable().ajax.reload();
+                    $('#tblStudents').DataTable().ajax.reload();
                 });
             }
             else {
@@ -58,7 +58,7 @@ var Save = function () {
 
 var Delete = function (id) {
     Swal.fire({
-        title: 'Do you want to delete this teacher?',
+        title: 'Do you want to delete this student?',
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -68,14 +68,14 @@ var Delete = function (id) {
         if (result.value) {
             $.ajax({
                 type: "POST",
-                url: "/Teachers/Delete?Id=" + id,
+                url: "/Students/Delete?Id=" + id,
                 success: function (result) {
                     if (result.IsSuccess) {
                         Swal.fire({
                             title: result.AlertMessage,
                             icon: "info",
                             didClose: () => {
-                                $('#tblTeacher').DataTable().ajax.reload();
+                                $('#tblStudents').DataTable().ajax.reload();
                             }
                         });
                     }

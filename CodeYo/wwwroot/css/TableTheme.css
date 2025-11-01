@@ -40,6 +40,7 @@ table thead th {
     padding: 15px !important;
     font-size: 14px;
     color: #fff !important;
+    text-align: center !important;
 }
 
 table {

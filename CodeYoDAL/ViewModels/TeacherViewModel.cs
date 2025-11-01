@@ -3,14 +3,15 @@ using ShaghalnyDAL.Models;
 
 namespace CodeYoDAL.ViewModels
 {
-    public class TeacherViewModel: EntityBase
+    public class TeacherViewModel : EntityBase
     {
         public Guid Id { get; set; }
         public string FullName { get; set; }
         public string PersonalPhoneNumber { get; set; }
         public string BusinessPhoneNumber { get; set; }
         public string SubjectName { get; set; }
-
+        public int StudentsCount { get; set; }
+        public List<StudentsViewModel> TeacherStudents { get; set; } = new List<StudentsViewModel>();
 
         public static implicit operator TeacherViewModel(Teachers _Teacher)
         {

@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static Azure.Core.HttpHeader;
+using static CodeYoDAL.DALHelpers.MainMenu;
 
 namespace CodeYoBL.Services
 {
@@ -23,116 +24,101 @@ namespace CodeYoBL.Services
             _httpContextAccessor = httpContextAccessor;
         }
 
-        public async Task<JsonResultViewModel> AddEditTeacherAsync(TeacherViewModel vm)
-        {
-            JsonResultViewModel _Result = new();
-            try
-            {
-                Teachers _Teacher = new();
-                string _UserName = _httpContextAccessor.HttpContext?.User?.Identity?.Name;
-                if (vm.Id != Guid.Empty) //Edit
-                {
-                    _Teacher = await _context.Teachers.FindAsync(vm.Id);
-                    vm.CreatedDate = _Teacher.CreatedDate;
-                    vm.CreatedBy = _Teacher.CreatedBy;
-                    vm.ModifiedDate = DateTime.Now;
-                    vm.ModifiedBy = _UserName;
-
-                    _context.Entry(_Teacher).CurrentValues.SetValues(vm);
-                    await _context.SaveChangesAsync();
-
-                    _Result.AlertMessage = $"Teacher updated successfully with the name of: {_Teacher.FullName}.";
-                }
-                else //Add
-                {
-                    vm.Id = Guid.NewGuid();
-                    _Teacher = vm;
-                    _Teacher.CreatedDate = DateTime.Now;
-                    _Teacher.ModifiedDate = DateTime.Now;
-                    _Teacher.CreatedBy = _UserName;
-                    _Teacher.ModifiedBy = _UserName;
-
-                    _context.Add(_Teacher);
-                    await _context.SaveChangesAsync();
-
-                    _Result.AlertMessage = $"Teacher has been added successfully with the name of: {_Teacher.FullName}.";
-                }
-                _Result.IsSuccess = true;
-                return _Result;
-            }
-            catch (Exception ex)
-            {
-                _Result.IsSuccess = false;
-                _Result.AlertMessage = "Operation Failed!";
-                return _Result;
-                throw;
-            }
-        }
-
-        public async Task<JsonResultViewModel> DeleteTeacherAsync(Guid TeacherId)
-        {
-            JsonResultViewModel _Result = new();
-            try
-            {
-                var _Teacher = await _context.Teachers.FindAsync(TeacherId);
-
-                if (_Teacher == null)
-                {
-                    _Result.IsSuccess = false;
-                    _Result.AlertMessage = "Operation Failed!";
-                    return _Result;
-                }
-
-                string UserName = _httpContextAccessor.HttpContext?.User?.Identity?.Name;
-                _Teacher.ModifiedDate = DateTime.Now;
-                _Teacher.ModifiedBy = UserName;
-                _Teacher.Cancelled = true;
-
-                _context.Update(_Teacher);
-                await _context.SaveChangesAsync();
-
-                _Result.AlertMessage = $"The teacher: '{_Teacher.FullName}' has been deleted successfully.";
-                _Result.IsSuccess = true;
-                return _Result;
-            }
-            catch (Exception)
-            {
-                _Result.IsSuccess = false;
-                _Result.AlertMessage = "Operation Failed!";
-                return _Result;
-                throw;
-            }
-        }
-
-        public async Task<TeacherViewModel> GetTeacherAsync(Guid TeacherId)
-        {
-            return await _context.Teachers.Where(t => t.Id == TeacherId && !t.Cancelled).FirstOrDefaultAsync() ?? new TeacherViewModel();
-        }
 
         public IQueryable<TeacherViewModel> GetTeachersGridItem()
         {
             try
             {
-                return (from _Teacher in _context.Teachers
-                        where !_Teacher.Cancelled
-                        select new TeacherViewModel
-                        {
-                            Id = _Teacher.Id,
-                            FullName = _Teacher.FullName,
-                            PersonalPhoneNumber = _Teacher.PersonalPhoneNumber,
-                            BusinessPhoneNumber = _Teacher.BusinessPhoneNumber,
-                            SubjectName = _Teacher.SubjectName,
+                var query = from _Teacher in _context.Teachers
+                            where !_Teacher.Cancelled
+                            join ts in _context.TeacherStudents on _Teacher.Id equals ts.TeacherId into studentTeachers
+                            select new TeacherViewModel
+                            {
+                                Id = _Teacher.Id,
+                                FullName = _Teacher.FullName,
+                                PersonalPhoneNumber = _Teacher.PersonalPhoneNumber,
+                                BusinessPhoneNumber = _Teacher.BusinessPhoneNumber,
+                                SubjectName = _Teacher.SubjectName,
 
-                            CreatedDate = _Teacher.CreatedDate,
-                            CreatedBy = _Teacher.CreatedBy,
-                            ModifiedDate = _Teacher.ModifiedDate,
-                            ModifiedBy = _Teacher.ModifiedBy
-                        }).OrderByDescending(x => x.Id);
+                                CreatedDate = _Teacher.CreatedDate,
+                                CreatedBy = _Teacher.CreatedBy,
+                                ModifiedDate = _Teacher.ModifiedDate,
+                                ModifiedBy = _Teacher.ModifiedBy,
+                                StudentsCount = studentTeachers.Count()
+                            };
+
+                return query.OrderByDescending(x => x.CreatedDate);
+
+                //return (from _Teacher in _context.Teachers
+                //        where !_Teacher.Cancelled
+                //        select new TeacherViewModel
+                //        {
+                //            Id = _Teacher.Id,
+                //            FullName = _Teacher.FullName,
+                //            PersonalPhoneNumber = _Teacher.PersonalPhoneNumber,
+                //            BusinessPhoneNumber = _Teacher.BusinessPhoneNumber,
+                //            SubjectName = _Teacher.SubjectName,
+
+                //            CreatedDate = _Teacher.CreatedDate,
+                //            CreatedBy = _Teacher.CreatedBy,
+                //            ModifiedDate = _Teacher.ModifiedDate,
+                //            ModifiedBy = _Teacher.ModifiedBy
+                //        }).OrderByDescending(x => x.Id);
             }
             catch (Exception ex)
             {
                 throw ex;
             }
         }
+
+        public IQueryable<StudentsViewModel> GetStudentsGridItem()
+        {
+            try
+            {
+                var query = from student in _context.Students
+                            where !student.Cancelled
+                            join ts in _context.TeacherStudents on student.Id equals ts.StudentId into studentTeachers
+                            select new StudentsViewModel
+                            {
+                                Id = student.Id,
+                                ArName = student.ArName,
+                                EnName = student.EnName,
+                                UserName = student.UserName,
+                                SerialNumber = student.SerialNumber,
+                                Password = student.Password,
+                                CreatedDate = student.CreatedDate,
+                                CreatedBy = student.CreatedBy,
+                                ModifiedDate = student.ModifiedDate,
+                                ModifiedBy = student.ModifiedBy,
+                                TeachersCount = studentTeachers.Count()
+                            };
+
+                return query.OrderByDescending(x => x.CreatedDate);
+
+
+                //return (from _Student in _context.Students
+                //        where !_Student.Cancelled
+                //        select new StudentsViewModel
+                //        {
+                //            Id = _Student.Id,
+                //            ArName = _Student.ArName,
+                //            EnName = _Student.EnName,
+                //            UserName = _Student.UserName,
+                //            SerialNumber = _Student.SerialNumber,
+                //            Password = _Student.Password,
+
+                //            CreatedDate = _Student.CreatedDate,
+                //            CreatedBy = _Student.CreatedBy,
+                //            ModifiedDate = _Student.ModifiedDate,
+                //            ModifiedBy = _Student.ModifiedBy
+                //        }).OrderByDescending(x => x.Id);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
     }
 }
