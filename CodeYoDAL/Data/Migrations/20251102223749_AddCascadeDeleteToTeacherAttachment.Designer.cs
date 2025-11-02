@@ -4,6 +4,7 @@ using CodeYoDAL.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CodeYoDAL.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251102223749_AddCascadeDeleteToTeacherAttachment")]
+    partial class AddCascadeDeleteToTeacherAttachment
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -422,20 +425,11 @@ namespace CodeYoDAL.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("Cancelled")
-                        .HasColumnType("bit");
-
                     b.Property<float>("CardHeight")
                         .HasColumnType("real");
 
                     b.Property<float>("CardWidth")
                         .HasColumnType("real");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("FrontCardName")
                         .IsRequired()
@@ -446,12 +440,6 @@ namespace CodeYoDAL.Data.Migrations
 
                     b.Property<bool>("IsQRInFrontCard")
                         .HasColumnType("bit");
-
-                    b.Property<string>("ModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("ModifiedDate")
-                        .HasColumnType("datetime2");
 
                     b.Property<float>("QRBackLeftPixels")
                         .HasColumnType("real");

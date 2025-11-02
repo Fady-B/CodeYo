@@ -38,7 +38,8 @@ namespace CodeYoDAL.Data
             builder.Entity<Teachers>()
                     .HasOne(t => t.TeacherCardsAttachement)
                     .WithOne(c => c.Teacher)
-                    .HasForeignKey<TeacherCardsAttachements>(c => c.TeacherId);
+                    .HasForeignKey<TeacherCardsAttachements>(c => c.TeacherId)
+                    .OnDelete(DeleteBehavior.Cascade);
 
             builder.Entity<TeacherStudents>().HasKey(st => new { st.StudentId, st.TeacherId });
 

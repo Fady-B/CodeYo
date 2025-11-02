@@ -1,0 +1,65 @@
+using CodeYoDAL.Models;
+using Microsoft.AspNetCore.Http;
+using ShaghalnyDAL.Models;
+
+namespace CodeYoDAL.ViewModels
+{
+    public class CardsDesignViewModel : EntityBase
+    {
+        public Guid Id { get; set; }
+        public Guid TeacherId { get; set; }
+        public IFormFile FrontCardFile { get; set; }
+        public IFormFile BackCardFile { get; set; }
+        public string FrontCardName { get; set; }
+        public string BackCardName { get; set; }
+        public float CardWidth { get; set; }
+        public float CardHeight { get; set; }
+        public bool IsQRInFrontCard { get; set; } = true;
+        public IFormFile QRInFrontCardFile { get; set; }
+        public float QRFrontTopPixels { get; set; }
+        public float QRFrontLeftPixels { get; set; }
+        public bool IsQRInBackCard { get; set; }
+        public IFormFile QRInBackCardFile { get; set; }
+        public float QRBackTopPixels { get; set; }
+        public float QRBackLeftPixels { get; set; }
+        public List<StudentsViewModel> TeacherStudents { get; set; } = new List<StudentsViewModel>();
+
+        public static implicit operator CardsDesignViewModel(TeacherCardsAttachements _TeacherCardsAttachements)
+        {
+            return new CardsDesignViewModel
+            {
+                Id = _TeacherCardsAttachements.Id,
+
+                //FullName = _Teacher.FullName,
+                //PersonalPhoneNumber = _Teacher.PersonalPhoneNumber,
+                //BusinessPhoneNumber = _Teacher.BusinessPhoneNumber,
+                //SubjectName = _Teacher.SubjectName,
+
+                CreatedDate = _TeacherCardsAttachements.CreatedDate,
+                ModifiedDate = _TeacherCardsAttachements.ModifiedDate,
+                CreatedBy = _TeacherCardsAttachements.CreatedBy,
+                ModifiedBy = _TeacherCardsAttachements.ModifiedBy,
+                Cancelled = _TeacherCardsAttachements.Cancelled,
+            };
+        }
+
+        public static implicit operator TeacherCardsAttachements(CardsDesignViewModel vm)
+        {
+            return new TeacherCardsAttachements
+            {
+                Id = vm.Id,
+
+                //FullName = vm.FullName,
+                //PersonalPhoneNumber = vm.PersonalPhoneNumber,
+                //BusinessPhoneNumber = vm.BusinessPhoneNumber,
+                //SubjectName = vm.SubjectName,
+
+                CreatedDate = vm.CreatedDate,
+                ModifiedDate = vm.ModifiedDate,
+                CreatedBy = vm.CreatedBy,
+                ModifiedBy = vm.ModifiedBy,
+                Cancelled = vm.Cancelled,
+            };
+        }
+    }
+}

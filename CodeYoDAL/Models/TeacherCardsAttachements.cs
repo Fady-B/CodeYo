@@ -2,14 +2,10 @@
 
 namespace ShaghalnyDAL.Models
 {
-    public class TeacherCardsAttachements
+    public class TeacherCardsAttachements: EntityBase
     {
         public Guid Id { get; set; }
         public Guid TeacherId { get; set; }
-        //public string FrontCardName
-        //{
-        //    get { return Id.ToString() + "_FrontCard"; }
-        //}
         public string FrontCardName { get; set; }
         public string BackCardName { get; set; }
         public float CardWidth { get; set; }
