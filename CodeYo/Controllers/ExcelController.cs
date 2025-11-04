@@ -14,6 +14,7 @@ using OfficeOpenXml.Table;
 using ShaghalnyDAL.Models;
 using System.Data;
 using System.Drawing;
+using System.Text.RegularExpressions;
 
 namespace SchoolMS.Controllers
 {
@@ -28,75 +29,12 @@ namespace SchoolMS.Controllers
 
         private readonly ExcelFileHelper _excelFileHelper = new();
 
-        public ExcelController(ApplicationDbContext context, /*IDatatableGridItemService IDatatableGridItemService,*/ IStudentService iStudentService, ICommonService ICommonService)
+        public ExcelController(ApplicationDbContext context, IStudentService iStudentService, ICommonService ICommonService)
         {
             _context = context;
-            //_iDatatableGridItemService = IDatatableGridItemService;
             _iStudentService = iStudentService;
             _iCommon = ICommonService;
         }
-
-        //[Authorize(Roles = CodeYoDAL.DALHelpers.MainMenu.Students.RoleName)]
-        //[HttpGet]
-        //public IActionResult Index()
-        //{
-        //    return View();
-        //}
-
-        //[HttpPost]
-        //public IActionResult GetDataTabelData()
-        //{
-        //    try
-        //    {
-        //        var draw = HttpContext.Request.Form["draw"].FirstOrDefault();
-        //        var start = Request.Form["start"].FirstOrDefault();
-        //        var length = Request.Form["length"].FirstOrDefault();
-
-        //        var sortColumn = Request.Form["columns[" + Request.Form["order[0][column]"].FirstOrDefault() + "][name]"].FirstOrDefault();
-        //        var sortColumnAscDesc = Request.Form["order[0][dir]"].FirstOrDefault();
-        //        var searchValue = Request.Form["search[value]"].FirstOrDefault();
-
-        //        int pageSize = length != null ? Convert.ToInt32(length) : 0;
-        //        int skip = start != null ? Convert.ToInt32(start) : 0;
-        //        int resultTotal = 0;
-
-        //        var _GetGridItem = _iDatatableGridItemService.GetStudentsGridItem();
-
-        //        //Sorting
-        //        if (!(string.IsNullOrEmpty(sortColumn) && string.IsNullOrEmpty(sortColumnAscDesc)))
-        //        {
-        //            _GetGridItem = _GetGridItem.OrderBy(sortColumn + " " + sortColumnAscDesc);
-        //        }
-
-        //        //Search
-        //        if (!string.IsNullOrEmpty(searchValue))
-        //        {
-        //            searchValue = searchValue.ToLower();
-        //            _GetGridItem = _GetGridItem.Where(obj => obj.Id.ToString().Contains(searchValue)
-        //            || obj.ArName.ToLower().Contains(searchValue)
-        //            || obj.EnName.ToLower().Contains(searchValue)
-        //            || obj.SerialNumber.ToLower().Contains(searchValue)
-        //            || obj.UserName.ToLower().Contains(searchValue)
-        //            || obj.Password.ToLower().Contains(searchValue)
-        //            || obj.TeachersCount.ToString().ToLower().Contains(searchValue)
-        //            || obj.CreatedBy.ToLower().Contains(searchValue)
-        //            || obj.ModifiedBy.ToLower().Contains(searchValue)
-        //            || obj.ModifiedDate.ToString().Contains(searchValue)
-        //            || obj.CreatedDate.ToString().Contains(searchValue));
-        //        }
-
-        //        resultTotal = _GetGridItem.Count();
-
-        //        var result = _GetGridItem.Skip(skip).Take(pageSize).ToList();
-        //        return Json(new { draw = draw, recordsFiltered = resultTotal, recordsTotal = resultTotal, data = result });
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw ex;
-        //    }
-        //}
-
-
 
         [HttpGet]
         public async Task<JsonResult> CreateStudntExcelSheet()
@@ -148,7 +86,6 @@ namespace SchoolMS.Controllers
                         }
                     }
 
-
                     worksheet.Cells.AutoFitColumns();
                     var startCell = worksheet.Cells[1, 1];
                     var endCell = worksheet.Cells[worksheet.Dimension.End.Row, worksheet.Dimension.End.Column];
@@ -158,7 +95,6 @@ namespace SchoolMS.Controllers
                     worksheet.Protection.AllowAutoFilter = false;
                     worksheet.Protection.SetPassword("a8dAC60a");
                     worksheet.Protection.AllowSelectLockedCells = true;
-
 
                     table.TableStyle = TableStyles.Medium2;
                     var stream = new System.IO.MemoryStream();
@@ -170,7 +106,6 @@ namespace SchoolMS.Controllers
                     vm.DocByte = stream.ToArray();
 
                     return new JsonResult(vm);
-
                 }
             }
             catch (Exception ex)
@@ -179,26 +114,6 @@ namespace SchoolMS.Controllers
             }
 
         }
-
-        //[HttpGet]
-        //public async Task<JsonResult> DownloadStusdentsExcelSheet()
-        //{
-        //    try
-        //    {
-        //        ExcelSheetViewModel vm = new();
-        //        string _WebRootPath = "wwwroot/Assets/Students Codes.xlsx";
-        //        using (var _MemoryStream = new MemoryStream())
-        //        {
-        //            using (FileStream file = new FileStream(_WebRootPath, FileMode.Open, FileAccess.Read))
-        //                file.CopyTo(_MemoryStream);
-        //            vm.DocByte = _MemoryStream.ToArray();
-        //        }
-
-        //        vm.FileName = "Students Codes.xlsx";
-        //        return new JsonResult(vm);
-        //    }
-        //    catch (Exception) { throw; }
-        //}
 
         [HttpGet]
         public IActionResult UploadExcelPartial()
@@ -244,9 +159,9 @@ namespace SchoolMS.Controllers
                     StudentsViewModel StudentExcel = new StudentsViewModel();
                     StudentExcel.ArName = item.ItemArray[0].ToString();
                     StudentExcel.EnName = item.ItemArray[1].ToString();
-                    StudentExcel.SerialNumber = item.ItemArray[2].ToString();
-                    StudentExcel.UserName = item.ItemArray[3].ToString();
-                    StudentExcel.Password = item.ItemArray[4].ToString();
+                    StudentExcel.SerialNumber = Regex.Replace(item.ItemArray[2].ToString(), @"\s+", "");
+                    StudentExcel.UserName = Regex.Replace(item.ItemArray[3].ToString(), @"\s+", "");
+                    StudentExcel.Password = Regex.Replace(item.ItemArray[4].ToString(), @"\s+", "");
 
                     StudentExcelList.Add(StudentExcel);
                 }
@@ -333,7 +248,7 @@ namespace SchoolMS.Controllers
                 var AllPastStudents = _context.Students.Where(i => !i.Cancelled);
                 string UserName = HttpContext.User.Identity.Name;
                 List<Students> StudentsToBeAdded = new List<Students>();
-                List<Students> StudentsToBeUpdated = new List<Students>();
+                //List<Students> StudentsToBeUpdated = new List<Students>();
                 foreach (var item in StudentsList)
                 {
                     var IfExist = await AllPastStudents.FirstOrDefaultAsync(i => i.SerialNumber == item.SerialNumber);
@@ -371,13 +286,13 @@ namespace SchoolMS.Controllers
                             throw ex;
                         }
                     }
-                    else
-                    {
-                        item.Id = IfExist.Id;
-                        item.ModifiedBy = UserName;
-                        item.ModifiedDate = DateTime.Now;
-                        StudentsToBeUpdated.Add(item);
-                    }
+                    //else
+                    //{
+                    //    item.Id = IfExist.Id;
+                    //    item.ModifiedBy = UserName;
+                    //    item.ModifiedDate = DateTime.Now;
+                    //    StudentsToBeUpdated.Add(item);
+                    //}
                 }
                 //List<Students> AllStudents = new List<Students>();
                 if (StudentsToBeAdded.Count > 0)
@@ -389,14 +304,14 @@ namespace SchoolMS.Controllers
                     //AllStudents.AddRange(StudentsToBeAdded);
                 }
 
-                if (StudentsToBeUpdated.Count > 0)
-                {
-                    _context.UpdateRange(StudentsToBeUpdated);
-                    await _context.SaveChangesAsync();
+                //if (StudentsToBeUpdated.Count > 0)
+                //{
+                //    _context.UpdateRange(StudentsToBeUpdated);
+                //    await _context.SaveChangesAsync();
 
 
-                    //AllStudents.AddRange(StudentsToBeAdded);
-                }
+                //    //AllStudents.AddRange(StudentsToBeAdded);
+                //}
 
                 //_JsonResultViewModel.PdfDTO = await GeneratePdfAfterUpload(AllStudents);
 

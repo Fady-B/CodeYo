@@ -1,0 +1,192 @@
+﻿@using CodeYoDAL.DALHelpers;
+@{
+    ViewData["Title"] = MainMenu.DesignCard.PageName;
+}
+
+<link href="~/css/CardsDesign.css" rel="stylesheet" />
+
+<div class="row">
+    <div class="col-lg-12">
+
+        <div class="card shadow-lg hover-card m-inline-auto-p-0 m-1">
+            <div class="card-body">
+
+                <div class="row justify-content-center align-items-center">
+                    <div class="col-md-4 row">
+                        <label class="col-md-12">Teacher</label>
+                        <select class="select2" asp-items="@ViewBag.DdlTeachers" id="Teachers" style="width: 100% !important;">
+                            <option selected disabled>Select User Type</option>
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <hr class="col-12" />
+
+        <!--Control Pannel-->
+        <div class="card shadow-lg hover-card m-inline-auto-p-0 m-1">
+            <div class="card-body">
+
+                <div class="row col-md-12">
+
+                    <div class="col-md-12 text-center headercarddesign mt-0 mb-3">
+                        <h3 class="w-100 text-center m-0"><strong>Control Panel</strong></h3>
+                    </div>
+
+                    <div class="radio-inputs mx-auto">
+                        <label class="radio">
+                            <input checked="" name="radio" type="radio" />
+                            <span class="name">Vertical</span>
+                        </label>
+                        <label class="radio">
+                            <input name="radio" type="radio" />
+                            <span class="name">Horizontal</span>
+                        </label>
+                    </div>
+
+                    <div class="design-divider"></div>
+
+                    <div class="w-fit mx-auto row column-gap-2 row-gap-2 align-items-center">
+                        <button type="button" id="btnSaveDesign" class="btn btn-success w-fit h-fit" onclick="SaveDesign();">
+                            Save Design
+                        </button>
+                        <button type="button" id="btnResetDesign" class="btn btn-warning w-fit h-fit" onclick="ResetDesign();">
+                            Reset Design
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <hr class="col-12" />
+
+        <!--Design Container-->
+        <div class="card shadow-lg hover-card m-inline-auto-p-0 m-1">
+            <div class="card-body">
+                <div class="row col-md-12 p-2">
+
+                    <!--Left Card (Front)-->
+                    <div class="col-md-6 row justify-content-center" style="align-self: flex-start;">
+
+                        <div class="col-md-12 text-center headercarddesign headerfrontcard mt-0 mb-3">
+                            <h3 class="w-100 text-center m-0"><strong>Front Card</strong></h3>
+                        </div>
+
+                        <div class="col-md-12 row justify-content-center mb-4">
+                            <div class="row col-md-5 justify-content-center">
+                                <label class="w-fit">Upload Front Card</label>
+                                <input type="file" class="btn btn-primary w-fit h-fit" id="FrontCardFileInput" accept="image/*" />
+                            </div>
+                        </div>
+
+                        <div class="row col-md-12 align-items-center justify-content-center column-gap-2 row-gap-2" id="MainFrontCardContainer" style="display: none;">
+
+                            <div class="col-md-12 row">
+                                <div class="col-md-6 row align-items-center justify-content-center column-gap-2 row-gap-2">
+                                    <div class="col-md-5">
+                                        <label class="col-md-12">Card Width</label>
+                                        <div class="row">
+                                            <input type="number" step="0.1" min="1" max="30" id="FrontCardWidthInput" class="col-sm-6" />
+                                            <span class="MeasureUnit w-fit">cm</span>
+                                        </div>
+                                        
+                                    </div>
+
+                                    <div class="col-md-5">
+                                        <label class="col-md-12">Card Height</label>
+                                        <div class="row">
+                                            <input type="number" step="0.1" min="1" max="30" id="FrontCardHeightInput" class="col-sm-6" />
+                                            <span class="MeasureUnit w-fit">cm</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-6 row align-items-center justify-content-center column-gap-2 row-gap-2">
+                                    <label class="w-fit">Show QR Code</label>
+                                    <input type="checkbox" id="ShowFrontQRCode" class="checkbox">
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 row align-items-center justify-content-center">
+                                <div id="FrontCardImagePreview" class="text-center mt-2"></div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="design-divider"></div>
+
+                    <!--Right Card (Back)-->
+                    <div class="col-md-6 row justify-content-center" style="align-self: flex-start;">
+
+                        <div class="col-md-12 text-center headercarddesign headerbackcard mt-0 mb-3">
+                            <h3 class="w-100 text-center m-0"><strong>Back Card</strong></h3>
+                        </div>
+
+                        <div class="col-md-12 row justify-content-center mb-4">
+                            <div class="row col-md-5 justify-content-center">
+                                <label class="w-fit">Upload Back Card</label>
+                                <input type="file" class="btn btn-info w-fit h-fit" id="BackCardFileInput" accept="image/*" />
+                            </div>
+                        </div>
+
+
+
+                        <div class="row col-md-12 align-items-center justify-content-center column-gap-2 row-gap-2" id="MainBackCardContainer" style="display: none;">
+
+                            <div class="col-md-12 row">
+                                <div class="col-md-6 row align-items-center justify-content-center column-gap-2 row-gap-2">
+                                    <div class="col-md-5">
+                                        <label class="col-md-12">Card Width</label>
+                                        <div class="row">
+                                            <input type="number" step="0.1" min="1" max="30" id="BackCardWidthInput" class="col-sm-6" />
+                                            <span class="MeasureUnit w-fit">cm</span>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-md-5">
+                                        <label class="col-md-12">Card Height</label>
+                                        <div class="row">
+                                            <input type="number" step="0.1" min="1" max="30" id="BackCardHeightInput" class="col-sm-6" />
+                                            <span class="MeasureUnit w-fit">cm</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-6 row align-items-center justify-content-center column-gap-2 row-gap-2">
+                                    <label class="w-fit">Show QR Code</label>
+                                    <input type="checkbox" id="ShowBackQRCode" class="checkbox">
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 row align-items-center justify-content-center">
+                                <div id="BackCardImagePreview" class="text-center mt-2"></div>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+</div>
+
+
+<script src="~/js/CardsDesign/CardsDesign.js"></script>
+
+<script>
+    $(document).ready(function () {
+        InitialSelect2();
+    });
+</script>

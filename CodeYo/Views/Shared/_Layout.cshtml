@@ -1,10 +1,11 @@
-﻿
+﻿@using CodeYoDAL.DALHelpers;
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - CodeYo</title>
+    <title>@ViewData["Title"] - @StaticData.ProjectName</title>
 
     @* <script src="~/lib/jquery/dist/jquery.min.js"></script> *@
 
@@ -86,7 +87,7 @@
     <!--
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2025 - CodeYo - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2025 - @StaticData.ProjectName - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
     -->

@@ -6,7 +6,6 @@ namespace CodeYoDAL.DALHelpers
     {
 
         public static string ProjectName = "Code-Yo";
-        public static string CompanyLogo = "CompanyLogo";
 
         //Static Data
         public static string DefaultUserProfileImage = "5b05e1bc-24c9-49ad-a9da-471469a1c18b-blank-person.png";

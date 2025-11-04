@@ -77,13 +77,13 @@ var loadExtraBigModal = function (url) {
 };
 
 function InitialSelect2(scope) {
-    debugger
+    
     const $scope = scope || $(document);
     const $modal = $scope.closest('.modal');
     const parent = $modal.length ? $modal : $(document.body);
 
     $scope.find('select.select2').each(function () {
-        debugger
+        
         if ($(this).hasClass("select2-hidden-accessible")) {
             $(this).select2('destroy');
         }

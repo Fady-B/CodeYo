@@ -21,7 +21,7 @@ namespace CodeYoDAL.DALHelpers
         public static class Students
         {
             public const string PageName = "Students Management";
-            public const string RoleName = "Students";
+            public const string RoleName = ApplicationRoles.Students;
             public const string Path = "/Students/Index";
             public const string ControllerName = "Students";
             public const string ActionName = "Index";
@@ -30,9 +30,18 @@ namespace CodeYoDAL.DALHelpers
         public static class Home
         {
             public const string PageName = "Home";
-            public const string RoleName = "Home Page";
+            public const string RoleName = ApplicationRoles.HomePage;
             public const string Path = "/Home/Index";
             public const string ControllerName = "Students";
+            public const string ActionName = "Index";
+        }
+
+        public static class DesignCard
+        {
+            public const string PageName = "Design Students Cards";
+            public const string RoleName = ApplicationRoles.DesignCard;
+            public const string Path = "/CardsDesign/Index";
+            public const string ControllerName = "CardsDesign";
             public const string ActionName = "Index";
         }
     }

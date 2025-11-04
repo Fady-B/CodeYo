@@ -13,8 +13,8 @@
             </div>
 
             <div class="col-lg-6  d-flex flex-column justify-content-center" data-aos="fade-in">
-                <h1>Build Your Cards Design <span>Code-Yo</span></h1>
-                <p>Become a talented designer and make your cards with Code-Yo</p>
+                <h1>Build Your Cards Design <span>@StaticData.ProjectName</span></h1>
+                <p>Become a talented designer and make your cards with @StaticData.ProjectName</p>
                 <div class="d-flex">
                     @if (SignInManager.IsSignedIn(User))
                     {
@@ -65,7 +65,7 @@
                 </div>
                 @* } *@
 
-                @if (User.IsInRole(ApplicationRoles.Teachers) || User.IsInRole(ApplicationRoles.SuperAdmin))
+                @if (User.IsInRole(ApplicationRoles.Teachers) || User.IsInRole(ApplicationRoles.SuperAdmin) || User.IsInRole(ApplicationRoles.Admin))
                 {
                     <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="100">
                         <div class="features-item">
@@ -75,12 +75,22 @@
                     </div>
                 }
 
-                @if (User.IsInRole(ApplicationRoles.Students) || User.IsInRole(ApplicationRoles.SuperAdmin))
+                @if (User.IsInRole(ApplicationRoles.Students) || User.IsInRole(ApplicationRoles.SuperAdmin) || User.IsInRole(ApplicationRoles.Admin))
                 {
                     <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="100">
                         <div class="features-item">
                             <i class="bi bi-mortarboard" style="color: #47aeff;"></i>
                             <h3><a href="@MainMenu.Students.Path" class="stretched-link">@MainMenu.Students.PageName</a></h3>
+                        </div>
+                    </div>
+                }
+
+                @if (User.IsInRole(ApplicationRoles.DesignCard) || User.IsInRole(ApplicationRoles.SuperAdmin) || User.IsInRole(ApplicationRoles.Admin))
+                {
+                    <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="100">
+                        <div class="features-item">
+                            <i class="bi bi-palette" style="color: #e80368;"></i>
+                            <h3><a href="@MainMenu.DesignCard.Path" class="stretched-link">@MainMenu.DesignCard.PageName</a></h3>
                         </div>
                     </div>
                 }

@@ -29,11 +29,17 @@ namespace CodeYoDAL.ViewModels
             return new CardsDesignViewModel
             {
                 Id = _TeacherCardsAttachements.Id,
-
-                //FullName = _Teacher.FullName,
-                //PersonalPhoneNumber = _Teacher.PersonalPhoneNumber,
-                //BusinessPhoneNumber = _Teacher.BusinessPhoneNumber,
-                //SubjectName = _Teacher.SubjectName,
+                TeacherId = _TeacherCardsAttachements.TeacherId,
+                FrontCardName = _TeacherCardsAttachements.FrontCardName,
+                BackCardName = _TeacherCardsAttachements.BackCardName,
+                CardWidth = _TeacherCardsAttachements.CardWidth,
+                CardHeight = _TeacherCardsAttachements.CardHeight,
+                IsQRInFrontCard = _TeacherCardsAttachements.IsQRInFrontCard,
+                QRFrontTopPixels = _TeacherCardsAttachements.QRFrontTopPixels,
+                QRFrontLeftPixels = _TeacherCardsAttachements.QRFrontLeftPixels,
+                IsQRInBackCard = _TeacherCardsAttachements.IsQRInBackCard,
+                QRBackTopPixels = _TeacherCardsAttachements.QRBackTopPixels,
+                QRBackLeftPixels = _TeacherCardsAttachements.QRBackLeftPixels,
 
                 CreatedDate = _TeacherCardsAttachements.CreatedDate,
                 ModifiedDate = _TeacherCardsAttachements.ModifiedDate,
@@ -48,11 +54,17 @@ namespace CodeYoDAL.ViewModels
             return new TeacherCardsAttachements
             {
                 Id = vm.Id,
-
-                //FullName = vm.FullName,
-                //PersonalPhoneNumber = vm.PersonalPhoneNumber,
-                //BusinessPhoneNumber = vm.BusinessPhoneNumber,
-                //SubjectName = vm.SubjectName,
+                TeacherId = vm.TeacherId,
+                FrontCardName = vm.FrontCardName,
+                BackCardName = vm.BackCardName,
+                CardWidth = vm.CardWidth,
+                CardHeight = vm.CardHeight,
+                IsQRInFrontCard = vm.IsQRInFrontCard,
+                QRFrontTopPixels = vm.QRFrontTopPixels,
+                QRFrontLeftPixels = vm.QRFrontLeftPixels,
+                IsQRInBackCard = vm.IsQRInBackCard,
+                QRBackTopPixels = vm.QRBackTopPixels,
+                QRBackLeftPixels = vm.QRBackLeftPixels,
 
                 CreatedDate = vm.CreatedDate,
                 ModifiedDate = vm.ModifiedDate,

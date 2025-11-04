@@ -52,7 +52,7 @@
     });
 
     var UploadFile =function() {
-        debugger
+        
         $("#btnSave").html("Uploading...");
         $('#btnSave').attr('disabled', 'disabled');
 
@@ -79,7 +79,7 @@
             processData: false,
             contentType: false,
             success: function (response) {
-                debugger
+                
                 if (response.IsSuccess) {
                     Swal.fire({
                         title: response.AlertMessage,
