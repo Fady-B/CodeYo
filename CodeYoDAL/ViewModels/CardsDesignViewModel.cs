@@ -14,14 +14,25 @@ namespace CodeYoDAL.ViewModels
         public string BackCardName { get; set; }
         public float CardWidth { get; set; }
         public float CardHeight { get; set; }
+
+        //Front Card
         public bool IsQRInFrontCard { get; set; } = true;
         public IFormFile QRInFrontCardFile { get; set; }
+        public float QRFrontSizePixels { get; set; }
         public float QRFrontTopPixels { get; set; }
         public float QRFrontLeftPixels { get; set; }
+
+
+        //Back Card
         public bool IsQRInBackCard { get; set; }
         public IFormFile QRInBackCardFile { get; set; }
+        public float QRBackSizePixels { get; set; }
         public float QRBackTopPixels { get; set; }
         public float QRBackLeftPixels { get; set; }
+
+
+
+
         public List<StudentsViewModel> TeacherStudents { get; set; } = new List<StudentsViewModel>();
 
         public static implicit operator CardsDesignViewModel(TeacherCardsAttachements _TeacherCardsAttachements)

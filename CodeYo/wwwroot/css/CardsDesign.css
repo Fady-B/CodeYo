@@ -1,11 +1,11 @@
-.headercarddesign {
+﻿.headercarddesign {
     background-color: lightgray;
     height: fit-content;
     border: solid 1px #0d075f;
     border-radius: 10px;
 }
 
-    /*.headercarddesign h3 {
+/*.headercarddesign h3 {
         margin: 0;
     }*/
 
@@ -21,10 +21,25 @@
     border: solid 1px #fff;
     border-radius: 7px;
     color: #fff;
-    display:  flex;
+    display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
+}
+.ImagePreviewContainer {
+    position: relative;
+    width: fit-content;
+    padding: 0;
+}
+.qr-overlay {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    /*width: 80px;
+    height: 80px;*/
+    z-index: 2;
+    border-radius: 6px;
+    display: none; /* الافتراضي مخفي */
 }
 /*Radios*/
 .radio-inputs {
