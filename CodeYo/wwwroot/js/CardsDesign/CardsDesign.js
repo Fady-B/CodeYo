@@ -7,14 +7,117 @@ var SaveDesign = function () {
     SwalSimpleAlert("Warning!... The changes you made (if any) will be lost", "success");
 }
 
-var DiplayQrTest = function (Card) {
-    let previewDiv, checkboxId;
+function FrontQrSizeInputFun() {
+    
+    var _QRFrontSizeInput = +parseFloat($("#QRFrontSizeInput").val());
+    var ShowFrontQRCode = $("#ShowFrontQRCode").is(":checked");
+
+    if (_QRFrontSizeInput == 0 && ShowFrontQRCode) {
+        $("#FrontQRCodeImage").css("width", "30%");
+    } else if (ShowFrontQRCode && _QRFrontSizeInput > 0) {
+        $("#FrontQRCodeImage").css("width", _QRFrontSizeInput + "%");
+    }
+    else if (!ShowFrontQRCode) {
+        $('#QRFrontSizeInput').off('input', FrontQrSizeInputFun);
+        $('#QRFrontSizeInput').removeAttr("oninput")
+    }
+    return;
+}
+function FrontQrPositionTopInputFun() {
+    var _QRFrontTopPixelsInput = +parseFloat($("#QRFrontTopPixelsInput").val());
+    var ShowFrontQRCode = $("#ShowFrontQRCode").is(":checked");
+
+    if (_QRFrontTopPixelsInput == 0 && ShowFrontQRCode) {
+        $("#FrontQRCodeImage").css("top", "1px");
+    } else if (ShowFrontQRCode && _QRFrontTopPixelsInput > 0) {
+        $("#FrontQRCodeImage").css("top", _QRFrontTopPixelsInput + "px");
+    }
+    else if (!ShowFrontQRCode) {
+        $('#QRFrontTopPixelsInput').off('input', FrontQrPositionTopInputFun);
+        $('#QRFrontTopPixelsInput').removeAttr("oninput")
+    }
+    return;
+}
+function FrontQrPositionLeftInputFun() {
+    var _QRFrontLeftPixelsInput = +parseFloat($("#QRFrontLeftPixelsInput").val());
+    var ShowFrontQRCode = $("#ShowFrontQRCode").is(":checked");
+
+    if (_QRFrontLeftPixelsInput == 0 && ShowFrontQRCode) {
+        $("#FrontQRCodeImage").css("left", "1px");
+    } else if (ShowFrontQRCode && _QRFrontLeftPixelsInput > 0) {
+        $("#FrontQRCodeImage").css("left", _QRFrontLeftPixelsInput + "px");
+    }
+    else if (!ShowFrontQRCode) {
+        $('#QRFrontLeftPixelsInput').off('input', OnLogoPositionLeftInput);
+        $('#QRFrontLeftPixelsInput').removeAttr("oninput")
+    }
+    return;
+}
+
+function BackQrSizeInputFun() {
+    
+    var _QRBackSizeInput = +parseFloat($("#QRBackSizeInput").val());
+    var ShowBackQRCode = $("#ShowBackQRCode").is(":checked");
+
+    if (_QRBackSizeInput == 0 && ShowBackQRCode) {
+        $("#BackQRCodeImage").css("width", "30%");
+    } else if (ShowBackQRCode && _QRBackSizeInput > 0) {
+        $("#BackQRCodeImage").css("width", _QRBackSizeInput + "%");
+    }
+    else if (!ShowBackQRCode) {
+        $('#QRBackSizeInput').off('input', BackQrSizeInputFun);
+        $('#QRBackSizeInput').removeAttr("oninput")
+    }
+    return;
+}
+function BackQrPositionTopInputFun() {
+    var _QRBackTopPixelsInput = +parseFloat($("#QRBackTopPixelsInput").val());
+    var ShowBackQRCode = $("#ShowBackQRCode").is(":checked");
+
+    if (_QRBackTopPixelsInput == 0 && ShowBackQRCode) {
+        $("#BackQRCodeImage").css("top", "1px");
+    } else if (ShowBackQRCode && _QRBackTopPixelsInput > 0) {
+        $("#BackQRCodeImage").css("top", _QRBackTopPixelsInput + "px");
+    }
+    else if (!ShowBackQRCode) {
+        $('#QRBackTopPixelsInput').off('input', BackQrPositionTopInputFun);
+        $('#QRBackTopPixelsInput').removeAttr("oninput")
+    }
+    return;
+}
+function BackQrPositionLeftInputFun() {
+    var _QRBackLeftPixelsInput = +parseFloat($("#QRBackLeftPixelsInput").val());
+    var ShowBackQRCode = $("#ShowBackQRCode").is(":checked");
+
+    if (_QRBackLeftPixelsInput == 0 && ShowBackQRCode) {
+        $("#BackQRCodeImage").css("left", "1px");
+    } else if (ShowBackQRCode && _QRBackLeftPixelsInput > 0) {
+        $("#BackQRCodeImage").css("left", _QRBackLeftPixelsInput + "px");
+    }
+    else if (!ShowBackQRCode) {
+        $('#QRBackLeftPixelsInput').off('input', OnLogoPositionLeftInput);
+        $('#QRBackLeftPixelsInput').removeAttr("oninput")
+    }
+    return;
+}
+
+
+var DiplayQr = function (Card) {
+    let previewDiv, checkboxId, qrId;
     if (Card === "Front") {
         previewDiv = document.getElementById('FrontCardImagePreview');
         checkboxId = 'ShowFrontQRCode';
+        qrId = 'FrontQRCodeImage';
+        $("#QRFrontSizeInput").attr("oninput", "FrontQrSizeInputFun();");
+        $("#QRFrontTopPixelsInput").attr("oninput", "FrontQrPositionTopInputFun();");
+        $("#QRFrontLeftPixelsInput").attr("oninput", "FrontQrPositionLeftInputFun();");
     } else if (Card === "Back") {
         previewDiv = document.getElementById('BackCardImagePreview');
         checkboxId = 'ShowBackQRCode';
+        qrId = 'BackQRCodeImage';
+        $("#QRBackSizeInput").attr("oninput", "BackQrSizeInputFun();");
+        $("#QRBackTopPixelsInput").attr("oninput", "BackQrPositionTopInputFun();");
+        $("#QRBackLeftPixelsInput").attr("oninput", "BackQrPositionLeftInputFun();");
     } else {
         return;
     }
@@ -25,6 +128,7 @@ var DiplayQrTest = function (Card) {
     if (checkbox.checked) {
         if (!qrImg) {
             qrImg = new Image();
+            qrImg.id = qrId;
             qrImg.src = "/images/TestQr.jpg";
             qrImg.alt = "QR Code";
             qrImg.classList.add("qr-overlay");
@@ -34,6 +138,7 @@ var DiplayQrTest = function (Card) {
     } else {
         if (qrImg) {
             qrImg.style.display = "none";
+            qrImg.remove();
         }
     }
 };
@@ -74,6 +179,7 @@ document.getElementById('FrontCardFileInput').addEventListener('change', functio
 
             const QrImg = new Image();
             QrImg.src = "/images/TestQr.jpg";
+            QrImg.id = "FrontQRCodeImage";
             QrImg.alt = "qr";
             QrImg.classList.add("qr-overlay");
 
@@ -98,6 +204,9 @@ document.getElementById('FrontCardFileInput').addEventListener('change', functio
 
             widthInput.value = widthCm;
             heightInput.value = heightCm;
+
+            
+
         };
     };
     reader.readAsDataURL(file);
@@ -140,6 +249,7 @@ document.getElementById('BackCardFileInput').addEventListener('change', function
             const QrImg = new Image();
             QrImg.src = "/images/TestQr.jpg";
             QrImg.alt = "qr";
+            QrImg.id = "BackQRCodeImage";
             QrImg.classList.add("qr-overlay");
 
             var _Checckbox = document.getElementById("ShowBackQRCode");
@@ -162,6 +272,7 @@ document.getElementById('BackCardFileInput').addEventListener('change', function
 
             widthInput.value = widthCm;
             heightInput.value = heightCm;
+            //$("#QRFrontTopPixelsInput").attr("oninput", "QrPositionTopInput");
         };
     };
     reader.readAsDataURL(file);

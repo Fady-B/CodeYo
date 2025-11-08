@@ -77,66 +77,75 @@
 
                         <div class="col-md-12 row justify-content-center mb-4">
                             <div class="row col-md-5 justify-content-center">
-                                <label class="w-fit">Upload Front Card</label>
+                                <label class="w-fit text-center" style="align-content: center;">Upload Front Card</label>
                                 <input type="file" class="btn btn-primary w-fit h-fit" id="FrontCardFileInput" accept="image/*" />
                             </div>
                         </div>
 
                         <div class="row col-md-12 align-items-center justify-content-center column-gap-2 row-gap-2" id="MainFrontCardContainer" style="display: none;">
 
-                            <div class="col-md-12 row">
+                            <div class="col-md-12 row align-items-center justify-content-center column-gap-2 row-gap-2">
+
                                 <div class="col-md-6 row align-items-center justify-content-center column-gap-2 row-gap-2">
-                                    <div class="col-md-5">
-                                        <label class="col-md-12">Card Width</label>
-                                        <div class="row">
-                                            <input type="number" step="0.1" min="1" max="30" id="FrontCardWidthInput" class="col-sm-6" />
-                                            <span class="MeasureUnit w-fit">cm</span>
+                                    <div class="col-md-12 row align-items-center justify-content-center">
+                                        <label class="col-md-12 text-center">Card Width</label>
+                                        <div class="row align-items-center justify-content-center">
+                                            <input type="number" step="0.1" min="1" max="30" id="FrontCardWidthInput" class="col-lg-6" />
+                                            <span class="MeasureUnit col-lg-2">cm</span>
                                         </div>
 
                                     </div>
 
-                                    <div class="col-md-5">
-                                        <label class="col-md-12">Card Height</label>
-                                        <div class="row">
-                                            <input type="number" step="0.1" min="1" max="30" id="FrontCardHeightInput" class="col-sm-6" />
-                                            <span class="MeasureUnit w-fit">cm</span>
+                                    <div class="col-md-12 row align-items-center justify-content-center">
+                                        <label class="col-md-12 text-center">Card Height</label>
+                                        <div class="row align-items-center justify-content-center">
+                                            <input type="number" step="0.1" min="1" max="30" id="FrontCardHeightInput" class="col-lg-6" />
+                                            <span class="MeasureUnit col-lg-2">cm</span>
                                         </div>
                                     </div>
-
                                 </div>
+
                                 <div class="col-md-6 row align-items-center justify-content-center column-gap-2 row-gap-2">
                                     <label class="w-fit">Show QR Code</label>
-                                    <input type="checkbox" id="ShowFrontQRCode" class="checkbox" onchange="DiplayQrTest('Front')">
+                                    <input type="checkbox" id="ShowFrontQRCode" class="checkbox" onchange="DiplayQr('Front')">
                                 </div>
                             </div>
 
-                            <div class="col-md-12 row">
+                            <hr />
 
-                                <div class="col-md-3">
+                            <div class="col-md-12 row align-items-center justify-content-center column-gap-2 row-gap-2">
+
+                                <div class="col-md-12 text-center headercarddesign headerfrontcard mt-0 mb-3">
+                                    <h3 class="w-100 text-center m-0"><strong>Qr Code Control</strong></h3>
+                                </div>
+
+                                <div class="col-md-5 text-center">
                                     <label class="col-md-12">Qr Size</label>
-                                    <div class="row">
-                                        <input type="number" step="0.1" min="1" max="100" id="QRFrontSizePixelsInput" class="col-sm-6" />
+                                    <div class="row align-items-center justify-content-center">
+                                        <input type="number" step="0.1" min="0.5" max="100" id="QRFrontSizeInput" class="col-sm-6" />
                                         <span class="MeasureUnit w-fit">%</span>
                                     </div>
                                 </div>
 
-                                <div class="col-md-3">
+                                <div class="col-md-5 text-center">
                                     <label class="col-md-12">Qr Top Space</label>
-                                    <div class="row">
-                                        <input type="number" step="0.1" min="1" max="100" id="QRFrontTopPixelsInput" class="col-sm-6" />
+                                    <div class="row align-items-center justify-content-center">
+                                        <input type="number" step="1" min="1" id="QRFrontTopPixelsInput" class="col-sm-6" />
                                         <span class="MeasureUnit w-fit">px</span>
                                     </div>
                                 </div>
 
-                                <div class="col-md-3">
+                                <div class="col-md-5 text-center">
                                     <label class="col-md-12">Qr Left Space</label>
-                                    <div class="row">
-                                        <input type="number" step="0.1" min="1" max="100" id="QRFrontLeftPixelsInput" class="col-sm-6" />
+                                    <div class="row align-items-center justify-content-center">
+                                        <input type="number" step="1" min="1" id="QRFrontLeftPixelsInput" class="col-sm-6" />
                                         <span class="MeasureUnit w-fit">px</span>
                                     </div>
                                 </div>
 
                             </div>
+
+                            <hr />
 
                             <div class="col-md-12 row align-items-center justify-content-center">
                                 <div id="FrontCardImagePreview" class="text-center mt-2 ImagePreviewContainer"></div>
@@ -157,7 +166,7 @@
 
                         <div class="col-md-12 row justify-content-center mb-4">
                             <div class="row col-md-5 justify-content-center">
-                                <label class="w-fit">Upload Back Card</label>
+                                <label class="w-fit text-center" style="align-content: center;">Upload Back Card</label>
                                 <input type="file" class="btn btn-info w-fit h-fit" id="BackCardFileInput" accept="image/*" />
                             </div>
                         </div>
@@ -166,60 +175,63 @@
 
                         <div class="row col-md-12 align-items-center justify-content-center column-gap-2 row-gap-2" id="MainBackCardContainer" style="display: none;">
 
-                            <div class="col-md-12 row">
+                            <div class="col-md-12 row align-items-center justify-content-center column-gap-2 row-gap-2">
                                 <div class="col-md-6 row align-items-center justify-content-center column-gap-2 row-gap-2">
-                                    <div class="col-md-5">
-                                        <label class="col-md-12">Card Width</label>
-                                        <div class="row">
-                                            <input type="number" step="0.1" min="1" max="30" id="BackCardWidthInput" class="col-sm-6" />
-                                            <span class="MeasureUnit w-fit">cm</span>
+
+                                    <div class="col-md-12 row align-items-center justify-content-center">
+                                        <label class="col-md-12 text-center">Card Width</label>
+                                        <div class="row align-items-center justify-content-center">
+                                            <input type="number" step="0.1" min="1" max="30" id="BackCardWidthInput" class="col-lg-6" />
+                                            <span class="MeasureUnit col-lg-2">cm</span>
                                         </div>
 
                                     </div>
 
-                                    <div class="col-md-5">
-                                        <label class="col-md-12">Card Height</label>
-                                        <div class="row">
-                                            <input type="number" step="0.1" min="1" max="30" id="BackCardHeightInput" class="col-sm-6" />
-                                            <span class="MeasureUnit w-fit">cm</span>
+                                    <div class="col-md-12 row align-items-center justify-content-center">
+                                        <label class="col-md-12 text-center">Card Height</label>
+                                        <div class="row align-items-center justify-content-center">
+                                            <input type="number" step="0.1" min="1" max="30" id="BackCardHeightInput" class="col-lg-6" />
+                                            <span class="MeasureUnit col-lg-2">cm</span>
                                         </div>
                                     </div>
 
                                 </div>
                                 <div class="col-md-6 row align-items-center justify-content-center column-gap-2 row-gap-2">
                                     <label class="w-fit">Show QR Code</label>
-                                    <input type="checkbox" id="ShowBackQRCode" class="checkbox" onchange="DiplayQrTest('Back')">
+                                    <input type="checkbox" id="ShowBackQRCode" class="checkbox" onchange="DiplayQr('Back')">
                                 </div>
                             </div>
-
-                            <div class="col-md-12 row">
-
-                                <div class="col-md-3">
+                            <hr />
+                            <div class="col-md-12 row align-items-center justify-content-center column-gap-2 row-gap-2">
+                                <div class="col-md-12 text-center headercarddesign headerfrontcard mt-0 mb-3">
+                                    <h3 class="w-100 text-center m-0"><strong>Qr Code Control</strong></h3>
+                                </div>
+                                <div class="col-md-5 text-center">
                                     <label class="col-md-12">Qr Size</label>
-                                    <div class="row">
-                                        <input type="number" step="0.1" min="1" max="100" id="QRBackSizePixelsInput" class="col-sm-6" />
+                                    <div class="row align-items-center justify-content-center">
+                                        <input type="number" step="0.1" min="0.5" id="QRBackSizeInput" class="col-sm-6" />
                                         <span class="MeasureUnit w-fit">%</span>
                                     </div>
                                 </div>
 
-                                <div class="col-md-3">
+                                <div class="col-md-5 text-center">
                                     <label class="col-md-12">Qr Top Space</label>
-                                    <div class="row">
-                                        <input type="number" step="0.1" min="1" max="100" id="QRBackTopPixelsInput" class="col-sm-6" />
+                                    <div class="row align-items-center justify-content-center">
+                                        <input type="number" step="1" min="1" id="QRBackTopPixelsInput" class="col-sm-6" />
                                         <span class="MeasureUnit w-fit">px</span>
                                     </div>
                                 </div>
 
-                                <div class="col-md-3">
+                                <div class="col-md-5 text-center">
                                     <label class="col-md-12">Qr Left Space</label>
-                                    <div class="row">
-                                        <input type="number" step="0.1" min="1" max="100" id="QRBackLeftPixelsInput" class="col-sm-6" />
+                                    <div class="row align-items-center justify-content-center">
+                                        <input type="number" step="1" min="1" id="QRBackLeftPixelsInput" class="col-sm-6" />
                                         <span class="MeasureUnit w-fit">px</span>
                                     </div>
                                 </div>
 
                             </div>
-
+                            <hr />
                             <div class="col-md-12 row align-items-center justify-content-center">
                                 <div id="BackCardImagePreview" class="text-center mt-2 ImagePreviewContainer"></div>
                             </div>

@@ -38,6 +38,10 @@
                         {
                             <li><a href="@MainMenu.Students.Path">@MainMenu.Students.PageName</a></li>
                         }
+                        @if (User.IsInRole(ApplicationRoles.DesignCard) || User.IsInRole(ApplicationRoles.SuperAdmin) || User.IsInRole(ApplicationRoles.Admin))
+                        {
+                            <li><a href="@MainMenu.DesignCard.Path">@MainMenu.DesignCard.PageName</a></li>
+                        }
                     </ul>
                 }
                 
