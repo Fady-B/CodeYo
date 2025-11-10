@@ -42,6 +42,59 @@ namespace SchoolMS.Controllers
             return View();
         }
 
+        [HttpGet]
+        public async Task<JsonResult> GetStudenData(string Name)
+        {
+            try
+            {
+                JsonResultViewModel result = new();
+                if (string.IsNullOrEmpty(Name))
+                {
+                    result.IsSuccess = false;
+                    result.AlertMessage = "Couldn't find what you are looking for!!";
+                    return new JsonResult(result);
+                }
+                var Student = await _iStudentService.GetFirstSudentAsync() ?? null;
+                if (Student == null)
+                {
+                    result.IsSuccess = false;
+                    return new JsonResult(result);
+                }
+                switch (Name)
+                {
+                    case "SerialNumber":
+
+                        result.IsSuccess = true;
+                        result.ReturnData = Student.SerialNumber;
+                        break;
+
+                    case "Username":
+
+                        result.IsSuccess = true;
+                        result.ReturnData = Student.UserName;
+                        break;
+
+                    case "Password":
+
+                        result.IsSuccess = true;
+                        result.ReturnData = Student.Password;
+                        break;
+
+                    default:
+                        result.IsSuccess = false;
+                        result.AlertMessage = "Couldn't find what you are looking for!!";
+                        break;
+                }
+                return new JsonResult(result);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
+
         //[HttpPost]
         //public IActionResult GetDataTabelData()
         //{

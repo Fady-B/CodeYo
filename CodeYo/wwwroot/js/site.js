@@ -18,7 +18,7 @@
 
 var FieldValidation = function (FieldName) {
     var _FieldName = $(FieldName).val();
-    if (_FieldName == "" || _FieldName == null) {
+    if (_FieldName == "" || _FieldName == null || _FieldName == undefined || _FieldName == 0) {
         return false;
     }
     return true;

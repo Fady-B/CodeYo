@@ -9,5 +9,6 @@ namespace CodeYoDAL.ViewModels
         public string CurrentURL { get; set; }
         public bool IsSuccess { get; set; }
         public dynamic ModelObject { get; set; }
+        public string ReturnData { get; set; }
     }
 }

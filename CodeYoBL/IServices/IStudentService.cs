@@ -12,5 +12,7 @@ namespace CodeYoBL.IServices
         Task<StudentsViewModel> GetAsync(Guid Id);
         Task<JsonResultViewModel> AddEditAsync(StudentsViewModel vm);
         Task<JsonResultViewModel> DeleteAsync(Guid Id);
+
+        Task<StudentsViewModel> GetFirstSudentAsync();
     }
 }

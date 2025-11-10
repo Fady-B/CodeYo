@@ -50,7 +50,7 @@ namespace CodeYoBL.Services
                         _context.TeacherStudents.RemoveRange(_Student.TeacherStudents);
                         _Student.TeacherStudents = new List<TeacherStudents>();
                     }
-                        
+
 
                     if (vm.TeachersIds != null && vm.TeachersIds.Any())
                     {
@@ -178,6 +178,18 @@ namespace CodeYoBL.Services
 
             return student ?? new StudentsViewModel();
 
+        }
+        public async Task<StudentsViewModel> GetFirstSudentAsync()
+        {
+            try
+            {
+                StudentsViewModel student = await _context.Students.Where(s => !s.Cancelled).FirstOrDefaultAsync() ?? null;
+                return student;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

@@ -14,7 +14,7 @@
                 <div class="row justify-content-center align-items-center">
                     <div class="col-md-4 row">
                         <label class="col-md-12">Teacher</label>
-                        <select class="select2" asp-items="@ViewBag.DdlTeachers" id="Teachers" style="width: 100% !important;">
+                        <select class="select2" asp-items="@ViewBag.DdlTeachers" id="TeachersDdl" style="width: 100% !important;">
                             <option selected disabled>Select User Type</option>
                         </select>
                     </div>
@@ -146,6 +146,43 @@
                             </div>
 
                             <hr />
+                            <div class="col-md-12 row align-items-center justify-content-center column-gap-2 row-gap-2">
+
+                                <div class="col-md-12 text-center headercarddesign headerfrontcard mt-0 mb-3">
+                                    <h3 class="w-100 text-center m-0"><strong>Data Control</strong></h3>
+                                </div>
+
+                                <!-- Serial Number Controls -->
+                                <div class="col-md-4 row align-items-center justify-content-evenly">
+                                    <button class="btn btn-outline-success w-fit" id="ShowSerialNumberFrontBtn" onclick="DataControlFun('SerialNumber', 'Front', 'Show');">Show Serial Number</button>
+                                    <button class="btn btn-outline-danger w-fit" id="RemoveSerialNumberFrontBtn" onclick="DataControlFun('SerialNumber', 'Front', 'Remove');" style="display:none;">Remove Serial Number</button>
+                                    <br />
+                                    <span>Font Size: </span><input type="range" min="10" max="500" value="40" id="FontSizeSerialNumberFront">
+                                    <span>Color: </span><input type="color" id="FontColorSerialNumberFront" value="#ffffff">
+                                </div>
+
+
+                                <!-- Username Controls -->
+                                <div class="col-md-4 row align-items-center justify-content-evenly">
+                                    <button class="btn btn-outline-info w-fit" id="ShowUsernameFrontBtn" onclick="DataControlFun('Username', 'Front', 'Show');">Show Username</button>
+                                    <button class="btn btn-outline-danger w-fit" id="RemoveUsernameFrontBtn" onclick="DataControlFun('Username', 'Front', 'Remove');" style="display:none;">Remove Username</button>
+                                    <br />
+                                    <span>Font Size: </span><input type="range" min="10" max="500" value="40" id="FontSizeUsernameFront">
+                                    <span>Color: </span><input type="color" id="FontColorUsernameFront" value="#ffffff">
+                                </div>
+
+                                <!-- Password Controls -->
+                                <div class="col-md-4 row align-items-center justify-content-evenly">
+                                    <button class="btn btn-outline-warning w-fit" id="ShowPasswordFrontBtn" onclick="DataControlFun('Password', 'Front', 'Show');">Show Password</button>
+                                    <button class="btn btn-outline-danger w-fit" id="RemovePasswordFrontBtn" onclick="DataControlFun('Password', 'Front', 'Remove');" style="display:none;">Remove Password</button>
+                                    <br />
+                                    <span>Font Size: </span><input type="range" min="10" max="500" value="40" id="FontSizePasswordFront">
+                                    <span>Color: </span><input type="color" id="FontColorPasswordFront" value="#ffffff">
+                                </div>
+
+                            </div>
+
+                            <hr />
 
                             <div class="col-md-12 row align-items-center justify-content-center">
                                 <div id="FrontCardImagePreview" class="text-center mt-2 ImagePreviewContainer"></div>
@@ -201,7 +238,9 @@
                                     <input type="checkbox" id="ShowBackQRCode" class="checkbox" onchange="DiplayQr('Back')">
                                 </div>
                             </div>
+
                             <hr />
+
                             <div class="col-md-12 row align-items-center justify-content-center column-gap-2 row-gap-2">
                                 <div class="col-md-12 text-center headercarddesign headerfrontcard mt-0 mb-3">
                                     <h3 class="w-100 text-center m-0"><strong>Qr Code Control</strong></h3>
@@ -231,7 +270,46 @@
                                 </div>
 
                             </div>
+
                             <hr />
+
+                            <div class="col-md-12 row align-items-center justify-content-center column-gap-2 row-gap-2">
+
+                                <div class="col-md-12 text-center headercarddesign headerfrontcard mt-0 mb-3">
+                                    <h3 class="w-100 text-center m-0"><strong>Data Control</strong></h3>
+                                </div>
+
+                                <!-- Serial Number Controls -->
+                                <div class="col-md-4 row align-items-center justify-content-evenly">
+                                    <button class="btn btn-outline-success w-fit" id="ShowSerialNumberBackBtn" onclick="DataControlFun('SerialNumber', 'Back', 'Show');">Show Serial Number</button>
+                                    <button class="btn btn-outline-danger w-fit" id="RemoveSerialNumberBackBtn" onclick="DataControlFun('SerialNumber', 'Back', 'Remove');" style="display:none;">Remove Serial Number</button>
+                                    <br />
+                                    <span>Font Size: </span><input type="range" min="10" max="500" value="40" id="FontSizeSerialNumberBack">
+                                    <span>Color: </span><input type="color" id="FontColorSerialNumberBack" value="#ffffff">
+                                </div>
+
+
+                                <!-- Username Controls -->
+                                <div class="col-md-4 row align-items-center justify-content-evenly">
+                                    <button class="btn btn-outline-info w-fit" id="ShowUsernameBackBtn" onclick="DataControlFun('Username', 'Back', 'Show');">Show Username</button>
+                                    <button class="btn btn-outline-danger w-fit" id="RemoveUsernameBackBtn" onclick="DataControlFun('Username', 'Back', 'Remove');" style="display:none;">Remove Username</button>
+                                    <br />
+                                    <span>Font Size: </span><input type="range" min="10" max="500" value="40" id="FontSizeUsernameBack">
+                                    <span>Color: </span><input type="color" id="FontColorUsernameBack" value="#ffffff">
+                                </div>
+
+                                <!-- Password Controls -->
+                                <div class="col-md-4 row align-items-center justify-content-evenly">
+                                    <button class="btn btn-outline-warning w-fit" id="ShowPasswordBackBtn" onclick="DataControlFun('Password', 'Back', 'Show');">Show Password</button>
+                                    <button class="btn btn-outline-danger w-fit" id="RemovePasswordBackBtn" onclick="DataControlFun('Password', 'Back', 'Remove');" style="display:none;">Remove Password</button>
+                                    <br />
+                                    <span>Font Size: </span><input type="range" min="10" max="500" value="40" id="FontSizePasswordBack">
+                                    <span>Color: </span><input type="color" id="FontColorPasswordBack" value="#ffffff">
+                                </div>
+
+                            </div>
+                            <hr />
+
                             <div class="col-md-12 row align-items-center justify-content-center">
                                 <div id="BackCardImagePreview" class="text-center mt-2 ImagePreviewContainer"></div>
                             </div>

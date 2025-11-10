@@ -17,8 +17,11 @@ namespace CodeYoDAL.ViewModels
         public List<Guid> TeachersIds { get; set; }
         public List<TeacherViewModel> StudentTeachers { get; set; } = new List<TeacherViewModel>();
 
-        public static implicit operator StudentsViewModel(Students _Students)
+        public static implicit operator StudentsViewModel(Students? _Students)
         {
+            if (_Students == null)
+                return null!;
+
             return new StudentsViewModel
             {
                 Id = _Students.Id,

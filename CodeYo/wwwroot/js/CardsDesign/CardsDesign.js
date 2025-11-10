@@ -8,7 +8,7 @@ var SaveDesign = function () {
 }
 
 function FrontQrSizeInputFun() {
-    
+
     var _QRFrontSizeInput = +parseFloat($("#QRFrontSizeInput").val());
     var ShowFrontQRCode = $("#ShowFrontQRCode").is(":checked");
 
@@ -55,7 +55,7 @@ function FrontQrPositionLeftInputFun() {
 }
 
 function BackQrSizeInputFun() {
-    
+
     var _QRBackSizeInput = +parseFloat($("#QRBackSizeInput").val());
     var ShowBackQRCode = $("#ShowBackQRCode").is(":checked");
 
@@ -144,22 +144,35 @@ var DiplayQr = function (Card) {
 };
 
 document.getElementById('FrontCardFileInput').addEventListener('change', function (e) {
+    var fileval = e.target;
+    if (!FieldValidation("#TeachersDdl")) {
+        toastr.warning("Please select a teacher before proceeding!", "warning");
+        fileval.value = "";
+        return;
+    }
     const previewDiv = document.getElementById('FrontCardImagePreview');
-    const file = e.target.files[0];
+    const file = fileval.files[0];
     if (!file) {
         previewDiv.innerHTML = "";
         document.getElementById("MainFrontCardContainer").style.display = "none";
+        fileval.value = "";
         return;
     }
 
     if (!file.type.startsWith("image/")) {
         previewDiv.innerHTML = "";
         document.getElementById("MainFrontCardContainer").style.display = "none";
-        alert("Please upload an image file only.");
+        toastr.info("Please upload an image file only.", "info");
+        fileval.value = "";
         return;
     }
 
     document.getElementById("MainFrontCardContainer").style.display = "flex";
+
+    const loader = document.createElement('div');
+    loader.className = 'spinner';
+    previewDiv.innerHTML = "";
+    previewDiv.appendChild(loader);
 
     const widthInput = document.getElementById('FrontCardWidthInput');
     const heightInput = document.getElementById('FrontCardHeightInput');
@@ -205,7 +218,7 @@ document.getElementById('FrontCardFileInput').addEventListener('change', functio
             widthInput.value = widthCm;
             heightInput.value = heightCm;
 
-            
+
 
         };
     };
@@ -214,22 +227,36 @@ document.getElementById('FrontCardFileInput').addEventListener('change', functio
 
 
 document.getElementById('BackCardFileInput').addEventListener('change', function (e) {
+    var fileval = e.target;
+    if (!FieldValidation("#TeachersDdl")) {
+        toastr.warning("Please select a teacher before proceeding!", "warning");
+        fileval.value = "";
+        return;
+    }
     const previewDiv = document.getElementById('BackCardImagePreview');
-    const file = e.target.files[0];
+    const file = fileval.files[0];
     if (!file) {
         previewDiv.innerHTML = "";
         document.getElementById("MainBackCardContainer").style.display = "none";
+        fileval.value = "";
         return;
     }
 
     if (!file.type.startsWith("image/")) {
         previewDiv.innerHTML = "";
         document.getElementById("MainBackCardContainer").style.display = "none";
-        alert("Please upload an image file only.");
+        toastr.info("Please upload an image file only!", "info");
+        fileval.value = "";
         return;
     }
 
     document.getElementById("MainBackCardContainer").style.display = "flex";
+
+
+    const loader = document.createElement('div');
+    loader.className = 'spinner';
+    previewDiv.innerHTML = "";
+    previewDiv.appendChild(loader);
 
     const widthInput = document.getElementById('BackCardWidthInput');
     const heightInput = document.getElementById('BackCardHeightInput');
@@ -335,4 +362,104 @@ async function getImageDPI(file) {
         };
         reader.readAsArrayBuffer(file);
     });
+}
+
+
+
+var DataControlFun = function (dataName, cardFace, btnAction) {
+    if (btnAction == "Remove") {
+        var existingTextDiv = document.getElementById('overlayText-' + dataName + cardFace);
+        if (existingTextDiv) existingTextDiv.remove();
+
+        var RemoveBtn = document.getElementById("Remove" + dataName + cardFace + "Btn");
+        var ShowBtn = document.getElementById("Show" + dataName + cardFace + "Btn");
+        RemoveBtn.style.display = "none";
+        ShowBtn.style.display = "block";
+        toastr.info(dataName + " removed from the card!", "info");
+    }
+    else {
+        $.ajax({
+            url: '/CardsDesign/GetStudenData',
+            type: 'GET',
+            data: { Name: dataName },
+            success: function (response) {
+                if (response.IsSuccess) {
+                    DisplayText(dataName, cardFace, response.ReturnData);
+                    toastr.success(dataName + " added to the card!", "Success");
+                }
+                else {
+                    
+                    Swal.fire({
+                        title: 'Enter ' + dataName + ' text example to display on the ' + cardFace + ' card',
+                        input: 'text',
+                        inputPlaceholder: 'Type the' + dataName + ' ...',
+                        showCancelButton: true,
+                        confirmButtonText: 'Submit',
+                        cancelButtonText: 'Cancel',
+                        inputValidator: (value) => {
+                            if (!value) {
+                                return 'You need to write something!'
+                            }
+                        }
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            DisplayText(dataName, cardFace, result.value);
+                            toastr.success(dataName + " added to the card!", "Success");
+                        }
+                        else {
+                            return;
+                        }
+                    });
+                }
+            },
+            error: function (xhr, status, error) {
+                
+                SwalSimpleAlert("Something went wrong.", "error");
+            }
+        });
+    }
+}
+
+var DisplayText = function (dataName, cardFace, dataText) {
+    var RemoveBtn = document.getElementById("Remove" + dataName + cardFace + "Btn");
+    var ShowBtn = document.getElementById("Show" + dataName + cardFace + "Btn");
+
+    var previewDiv = document.getElementById(cardFace + 'CardImagePreview');
+
+    var textDiv = document.createElement('div');
+    textDiv.id = 'overlayText-' + dataName + cardFace;
+    textDiv.innerText = dataText;
+
+    textDiv.style.position = 'absolute';
+    textDiv.style.top = '10px';
+    textDiv.style.left = '10px';
+    textDiv.style.color = 'white';
+    textDiv.style.fontSize = '40%';
+    textDiv.style.fontWeight = 'bold';
+    textDiv.style.cursor = 'move';
+    //textDiv.style.textShadow = '1px 1px 2px black';
+
+    previewDiv.appendChild(textDiv);
+
+    $(textDiv).draggable({
+        containment: previewDiv // يضمن أن النص يبقى داخل الصورة
+    });
+
+    // ربط التحكم في الحجم واللون
+    var sizeSlider = document.getElementById('FontSize' + dataName + cardFace);
+    if (sizeSlider) {
+        sizeSlider.addEventListener('input', function () {
+            textDiv.style.fontSize = this.value + '%';
+        });
+    }
+
+    var colorPicker = document.getElementById('FontColor' + dataName + cardFace);
+    if (colorPicker) {
+        colorPicker.addEventListener('input', function () {
+            textDiv.style.color = this.value;
+        });
+    }
+
+    RemoveBtn.style.display = "block";
+    ShowBtn.style.display = "none";
 }
