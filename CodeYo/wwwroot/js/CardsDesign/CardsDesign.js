@@ -4,6 +4,85 @@ var ResetDesign = function () {
 }
 
 var SaveDesign = function () {
+    debugger
+    if (!FieldValidation("#TeachersDdl")) {
+        toastr.warning("Please select a teacher before proceeding!", "warning");
+        return;
+    }
+
+    $("#btnSaveDesign").html("Please Wait...");
+    $('#btnSaveDesign').attr('disabled', 'disabled');
+
+
+    var _FormData = new FormData()
+    _FormData.append('TeacherId', $("#TeachersDdl").val())
+    var FrontFormFile = $('#FrontCardFileInput')[0].files[0];
+    if (FrontFormFile == undefined) {
+        SwalSimpleAlert("Please select the front image card", "warning");
+        return;
+    }
+
+    _FormData.append('FrontCardFile', FrontFormFile)
+
+
+    var BackFormFile = $('#BackCardFileInput')[0].files[0];
+    if (BackFormFile != undefined) {
+        _FormData.append('BackCardFile', BackFormFile)
+    }
+
+    _FormData.append('CardWidth', $("#FrontCardWidthInput").val())
+    _FormData.append('CardHeight', $("#FrontCardHeightInput").val())
+
+    _FormData.append('IsQRInFrontCard', $("#ShowFrontQRCode").is(":checked"))
+
+    if ($("#ShowFrontQRCode").is(":checked")) {
+        _FormData.append('QRFrontSizePercent', $("#QRFrontSizeInput").val())
+        _FormData.append('QRFrontTopPixels', $("#QRFrontTopPixelsInput").val())
+        _FormData.append('QRFrontLeftPixels', $("#QRFrontLeftPixelsInput").val())
+    }
+
+    _FormData.append('IsQRInBackCard', $("#ShowBackQRCode").is(":checked"))
+
+    if ($("#ShowBackQRCode").is(":checked")) {
+        _FormData.append('QRBackSizePixels', $("#QRBackSizeInput").val())
+        _FormData.append('QRBackTopPixels', $("#QRBackTopPixelsInput").val())
+        _FormData.append('QRBackLeftPixels', $("#QRBackLeftPixelsInput").val())
+    }
+
+    const FrontContainer = document.getElementById('FrontCardImagePreview').innerHTML;
+    _FormData.append('FrontHtmlDataContent', FrontContainer)
+
+    const BackContainer = document.getElementById('FrontCardImagePreview').innerHTML;
+    _FormData.append('BackHtmlDataContent', BackContainer)
+    debugger
+    $.ajax({
+        type: "POST",
+        url: "/CardsDesign/SaveCardDesign",
+        data: _FormData,
+        processData: false,
+        contentType: false,
+        success: function (result) {
+            debugger
+            if (result.IsSuccess) {
+                Swal.fire({
+                    title: result.AlertMessage,
+                    icon: "success"
+                }).then(function () {
+                    //document.getElementById("btnClose").click();
+
+                });
+            }
+            $("#btnSaveDesign").html("Save Design");
+            $('#btnSaveDesign').removeAttr('disabled');
+        },
+        error: function (errormessage) {
+            SwalSimpleAlert(errormessage.responseText, "warning");
+            $("#btnSaveDesign").html("Save Design");
+            $('#btnSaveDesign').removeAttr('disabled');
+        }
+    });
+
+
     SwalSimpleAlert("Warning!... The changes you made (if any) will be lost", "success");
 }
 
@@ -184,7 +263,7 @@ document.getElementById('FrontCardFileInput').addEventListener('change', functio
         img.src = event.target.result;
         img.style.maxWidth = "100%";
         img.style.border = "1px solid #ccc";
-
+        img.id = "FrontCardImage";
         img.onload = async function () {
 
             previewDiv.innerHTML = "";
@@ -203,6 +282,13 @@ document.getElementById('FrontCardFileInput').addEventListener('change', functio
             else {
                 QrImg.style.display = "none";
             }
+
+            QrImg.style.position = "absolute"
+            QrImg.style.top = "1px"
+            QrImg.style.left = "1px"
+            QrImg.style.zIndex = "2"
+            QrImg.style.borderRadius = "6px"
+
             previewDiv.appendChild(QrImg);
 
             const pxWidth = img.naturalWidth;
@@ -388,7 +474,7 @@ var DataControlFun = function (dataName, cardFace, btnAction) {
                     toastr.success(dataName + " added to the card!", "Success");
                 }
                 else {
-                    
+
                     Swal.fire({
                         title: 'Enter ' + dataName + ' text example to display on the ' + cardFace + ' card',
                         input: 'text',
@@ -413,7 +499,7 @@ var DataControlFun = function (dataName, cardFace, btnAction) {
                 }
             },
             error: function (xhr, status, error) {
-                
+
                 SwalSimpleAlert("Something went wrong.", "error");
             }
         });

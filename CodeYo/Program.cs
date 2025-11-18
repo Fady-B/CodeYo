@@ -50,6 +50,7 @@ builder.Services.AddScoped<IDatatableGridItemService, DatatableGridItemService>(
 builder.Services.AddScoped<ITeacherService, TeacherService>();
 builder.Services.AddScoped<IStudentService, StudentService>();
 builder.Services.AddScoped<ICommonService, CommonService>();
+builder.Services.AddScoped<ICardsService, CardsService>();
 
 
 

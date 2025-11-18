@@ -1,6 +1,5 @@
-﻿using CodeYoDAL.Models;
-
-namespace ShaghalnyDAL.Models
+﻿
+namespace CodeYoDAL.Models
 {
     public class TeacherCardsAttachements: EntityBase
     {
@@ -11,12 +10,15 @@ namespace ShaghalnyDAL.Models
         public float CardWidth { get; set; }
         public float CardHeight { get; set; }
         public bool IsQRInFrontCard { get; set; } = true;
+        public float QRFrontSizePercent { get; set; }
         public float QRFrontTopPixels { get; set; }
         public float QRFrontLeftPixels { get; set; }
         public bool IsQRInBackCard { get; set; }
+        public float QRBackSizePixels { get; set; }
         public float QRBackTopPixels { get; set; }
         public float QRBackLeftPixels { get; set; }
-
+        public string FrontHtmlDataContent { get; set; }
+        public string BackHtmlDataContent { get; set; }
         public Teachers Teacher { get; set; }
     }
 }

@@ -1,6 +1,5 @@
 using CodeYoDAL.Models;
 using Microsoft.AspNetCore.Http;
-using ShaghalnyDAL.Models;
 
 namespace CodeYoDAL.ViewModels
 {
@@ -17,20 +16,21 @@ namespace CodeYoDAL.ViewModels
 
         //Front Card
         public bool IsQRInFrontCard { get; set; } = true;
-        public IFormFile QRInFrontCardFile { get; set; }
-        public float QRFrontSizePixels { get; set; }
+        //public IFormFile QRInFrontCardFile { get; set; }
+        public float QRFrontSizePercent { get; set; }
         public float QRFrontTopPixels { get; set; }
         public float QRFrontLeftPixels { get; set; }
 
 
         //Back Card
         public bool IsQRInBackCard { get; set; }
-        public IFormFile QRInBackCardFile { get; set; }
+        //public IFormFile QRInBackCardFile { get; set; }
         public float QRBackSizePixels { get; set; }
         public float QRBackTopPixels { get; set; }
         public float QRBackLeftPixels { get; set; }
 
-
+        public string FrontHtmlDataContent { get; set; }
+        public string BackHtmlDataContent { get; set; }
 
 
         public List<StudentsViewModel> TeacherStudents { get; set; } = new List<StudentsViewModel>();
@@ -46,11 +46,15 @@ namespace CodeYoDAL.ViewModels
                 CardWidth = _TeacherCardsAttachements.CardWidth,
                 CardHeight = _TeacherCardsAttachements.CardHeight,
                 IsQRInFrontCard = _TeacherCardsAttachements.IsQRInFrontCard,
+                QRFrontSizePercent = _TeacherCardsAttachements.QRFrontSizePercent,
                 QRFrontTopPixels = _TeacherCardsAttachements.QRFrontTopPixels,
                 QRFrontLeftPixels = _TeacherCardsAttachements.QRFrontLeftPixels,
                 IsQRInBackCard = _TeacherCardsAttachements.IsQRInBackCard,
+                QRBackSizePixels = _TeacherCardsAttachements.QRBackSizePixels,
                 QRBackTopPixels = _TeacherCardsAttachements.QRBackTopPixels,
                 QRBackLeftPixels = _TeacherCardsAttachements.QRBackLeftPixels,
+                FrontHtmlDataContent = _TeacherCardsAttachements.FrontHtmlDataContent,
+                BackHtmlDataContent = _TeacherCardsAttachements.BackHtmlDataContent,
 
                 CreatedDate = _TeacherCardsAttachements.CreatedDate,
                 ModifiedDate = _TeacherCardsAttachements.ModifiedDate,
@@ -71,11 +75,15 @@ namespace CodeYoDAL.ViewModels
                 CardWidth = vm.CardWidth,
                 CardHeight = vm.CardHeight,
                 IsQRInFrontCard = vm.IsQRInFrontCard,
+                QRFrontSizePercent = vm.QRFrontSizePercent,
                 QRFrontTopPixels = vm.QRFrontTopPixels,
                 QRFrontLeftPixels = vm.QRFrontLeftPixels,
                 IsQRInBackCard = vm.IsQRInBackCard,
+                QRBackSizePixels = vm.QRBackSizePixels,
                 QRBackTopPixels = vm.QRBackTopPixels,
                 QRBackLeftPixels = vm.QRBackLeftPixels,
+                FrontHtmlDataContent = vm.FrontHtmlDataContent,
+                BackHtmlDataContent = vm.BackHtmlDataContent,
 
                 CreatedDate = vm.CreatedDate,
                 ModifiedDate = vm.ModifiedDate,
