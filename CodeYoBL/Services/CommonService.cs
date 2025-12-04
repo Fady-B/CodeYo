@@ -33,5 +33,23 @@ namespace CodeYoBL.Services
                         Name = tblObj.FullName
                     }).OrderBy(x => x.Name);
         }
+
+        public async Task<CountersViewModel> GetCountersAsync()
+        {
+            CountersViewModel Counts = new();
+            try
+            {
+                Counts.TeachersCount = await _context.Teachers.Where(t => !t.Cancelled).CountAsync();
+                Counts.StudentsCount = await _context.Students.Where(t => !t.Cancelled).CountAsync();
+
+                return Counts;
+            }
+            catch (Exception)
+            {
+                return Counts;
+            }
+            
+        }
+
     }
 }

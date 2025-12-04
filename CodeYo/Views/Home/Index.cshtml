@@ -1,32 +1,36 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-
+@using CodeYoBL.IServices;
+@inject ICommonService _iCommonService;
+@{
+    var Counters = await _iCommonService.GetCountersAsync();
+}
 
 <!-- Stats Section -->
 <section class="stats section light-background">
 
     <div class="container" data-aos="fade-up" data-aos-delay="100">
 
-        <div class="row gy-4">
+        <div class="row gy-4 justify-content-center align-items-center">
 
             <div class="col-lg-3 col-md-6 d-flex flex-column align-items-center">
-                <i class="bi bi-emoji-smile"></i>
+                <i class="bi bi-person"></i>
                 <div class="stats-item">
-                    <span data-purecounter-start="0" data-purecounter-end="232" data-purecounter-duration="1" class="purecounter"></span>
-                    <p>Happy Clients</p>
+                    <span data-purecounter-start="0" data-purecounter-end="@Counters.TeachersCount" data-purecounter-duration="1" class="purecounter"></span>
+                    <p>No. Of Teachers</p>
                 </div>
             </div><!-- End Stats Item -->
 
             <div class="col-lg-3 col-md-6 d-flex flex-column align-items-center">
-                <i class="bi bi-journal-richtext"></i>
+                <i class="bi bi-bar-chart"></i>
                 <div class="stats-item">
-                    <span data-purecounter-start="0" data-purecounter-end="521" data-purecounter-duration="1" class="purecounter"></span>
-                    <p>Projects</p>
+                    <span data-purecounter-start="0" data-purecounter-end="@Counters.StudentsCount" data-purecounter-duration="1" class="purecounter"></span>
+                    <p>No. Of Students</p>
                 </div>
             </div><!-- End Stats Item -->
 
-            <div class="col-lg-3 col-md-6 d-flex flex-column align-items-center">
+            @* <div class="col-lg-3 col-md-6 d-flex flex-column align-items-center">
                 <i class="bi bi-headset"></i>
                 <div class="stats-item">
                     <span data-purecounter-start="0" data-purecounter-end="1463" data-purecounter-duration="1" class="purecounter"></span>
@@ -40,7 +44,7 @@
                     <span data-purecounter-start="0" data-purecounter-end="15" data-purecounter-duration="1" class="purecounter"></span>
                     <p>Hard Workers</p>
                 </div>
-            </div><!-- End Stats Item -->
+            </div><!-- End Stats Item --> *@
 
         </div>
 

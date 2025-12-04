@@ -10,5 +10,7 @@ namespace CodeYoBL.IServices
     public interface ICommonService
     {
         IQueryable<ItemDropdownListViewModel> GetTeachersDdl();
+
+        Task<CountersViewModel> GetCountersAsync();
     }
 }
